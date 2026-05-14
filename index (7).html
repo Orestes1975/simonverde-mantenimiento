@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simon Verde Sport — Mantenimiento</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<style>
+:root{
+  --navy:#26294C;--navy2:#1a1d38;--navy3:#13152b;
+  --lime:#C8D64D;--lime-lt:#eef3b0;
+  --sky:#0A75B9;--sky-lt:#d8edf9;--sky2:#085d94;
+  --red:#E24B4A;--red-lt:#fdeaea;--red-dk:#7a1f1f;
+  --amber:#f0a500;--amber-lt:#fff3cc;--amber-dk:#7a5000;
+  --green:#2e9e5b;--green-lt:#d4f0e2;
+  --white:#fff;--off:#f5f6fa;
+  --border:rgba(38,41,76,0.12);--border2:rgba(38,41,76,0.22);
+  --text:#26294C;--text2:#626585;--text3:#a0a3be;
+  --r:10px;--rsm:7px;
+  --shadow:0 2px 8px rgba(38,41,76,0.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Barlow',sans-serif;background:var(--off);color:var(--text);min-height:100vh}
+#login-screen{display:flex;min-height:100vh;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--navy3),var(--navy));padding:1.5rem}
+.login-box{background:var(--white);border-radius:16px;width:100%;max-width:420px;overflow:hidden;box-shadow:0 24px 48px rgba(0,0,0,0.3)}
+.login-head{background:var(--navy);padding:2rem;text-align:center;border-bottom:4px solid var(--lime)}
+.login-icon{width:56px;height:56px;background:var(--lime);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:28px;color:var(--navy3)}
+.login-title{font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:var(--white)}
+.login-sub{font-size:11px;color:rgba(255,255,255,0.5);letter-spacing:.1em;text-transform:uppercase;margin-top:4px}
+.login-body{padding:1.5rem}
+.login-label{font-size:12px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:1rem}
+.user-btn{display:flex;align-items:center;gap:12px;padding:.875rem 1rem;border:2px solid #e0e3f0;border-radius:10px;background:var(--white);cursor:pointer;width:100%;text-align:left;font-family:'Barlow',sans-serif;margin-bottom:8px;transition:all .15s}
+.user-btn:hover{border-color:var(--navy);background:var(--off)}
+.user-avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;flex-shrink:0}
+.user-name{font-size:15px;font-weight:700;color:var(--navy)}
+.user-role{font-size:11px;color:var(--text2);margin-top:1px}
+#app-shell{display:none}
+.app-header{background:linear-gradient(135deg,var(--navy3),var(--navy));padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(38,41,76,0.3)}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-mark{width:40px;height:40px;background:var(--lime);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--navy3);font-size:20px}
+.logo-text{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;color:#fff}
+.logo-sub{font-size:10px;color:rgba(255,255,255,0.5);letter-spacing:.08em;text-transform:uppercase;margin-top:1px}
+.header-user{display:flex;align-items:center;gap:10px}
+.header-name{font-size:13px;font-weight:700;color:#fff}
+.header-role{font-size:10px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:.06em}
+.header-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff}
+.btn-logout{background:transparent;border:1px solid rgba(255,255,255,0.25);padding:5px 10px;border-radius:var(--rsm);font-size:12px;cursor:pointer;color:rgba(255,255,255,0.7);font-family:'Barlow',sans-serif;display:flex;align-items:center;gap:5px}
+.app-nav{background:var(--navy);display:flex;padding:0 1.5rem;overflow-x:auto;position:sticky;top:64px;z-index:99;box-shadow:0 2px 8px rgba(38,41,76,0.2)}
+.nav-btn{padding:14px 16px;font-size:12px;font-family:'Barlow',sans-serif;font-weight:700;border:none;background:transparent;cursor:pointer;color:rgba(255,255,255,0.5);border-bottom:3px solid transparent;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;display:flex;align-items:center;gap:6px;transition:all .15s}
+.nav-btn.active{color:var(--lime);border-bottom-color:var(--lime)}
+.nav-badge{background:var(--red);color:#fff;font-size:10px;padding:2px 6px;border-radius:8px;font-weight:700}
+.app-body{max-width:740px;margin:0 auto;padding:1.5rem 1rem}
+.page{display:none}.page.active{display:block}
+.card{background:var(--white);border-radius:var(--r);border:1px solid var(--border);margin-bottom:1rem;box-shadow:var(--shadow);overflow:hidden}
+.card-header{padding:.875rem 1.25rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:10px}
+.card-title{font-size:13px;font-weight:700;color:var(--navy);display:flex;align-items:center;gap:7px}
+.card-title i{color:var(--sky);font-size:16px}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1.25rem}
+@media(max-width:520px){.kpi-grid{grid-template-columns:repeat(2,1fr)}}
+.kpi{background:var(--white);border-radius:var(--r);border:1px solid var(--border);padding:.875rem 1rem;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--lime)}
+.kpi-label{font-size:10px;color:var(--text2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px;font-weight:600}
+.kpi-value{font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;line-height:1}
+.kpi-sub{font-size:11px;color:var(--text2);margin-top:4px}
+.cg{color:var(--green)}.cr{color:var(--red)}.ca{color:var(--amber)}.cn{color:var(--navy)}.cs{color:var(--sky)}
+.badge{padding:3px 9px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap}
+.bg{background:var(--green-lt);color:var(--green)}.ba{background:var(--amber-lt);color:var(--amber-dk)}.br{background:var(--red-lt);color:var(--red-dk)}.bb{background:var(--off);color:var(--text2)}.bs{background:var(--sky-lt);color:var(--sky2)}
+.alert{padding:.875rem 1.1rem;border-radius:var(--rsm);border-left:4px solid;margin-bottom:1rem;font-size:13px;line-height:1.55;font-weight:500}
+.alert-r{background:var(--red-lt);border-color:var(--red);color:#5c1c1c}
+.alert-a{background:var(--amber-lt);border-color:var(--amber);color:var(--amber-dk)}
+.alert-b{background:var(--sky-lt);border-color:var(--sky);color:var(--sky2)}
+.alert-g{background:var(--green-lt);border-color:var(--green);color:#1a5c35}
+.zone-row{display:flex;align-items:center;padding:.75rem 1.25rem;border-bottom:1px solid var(--border);gap:12px;transition:background .1s}
+.zone-row:last-child{border-bottom:none}
+.zone-row:hover{background:var(--off)}
+.zone-icon{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.bar-wrap{flex:1;height:6px;background:var(--off);border-radius:3px;overflow:hidden;min-width:60px}
+.bar-fill{height:100%;border-radius:3px;transition:width .4s}
+.btn-p{background:var(--navy);color:var(--lime);border:none;padding:9px 18px;border-radius:var(--rsm);font-size:13px;font-family:'Barlow',sans-serif;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all .15s}
+.btn-p:hover{background:var(--navy2)}
+.btn-g{background:transparent;border:1.5px solid var(--border2);padding:8px 14px;border-radius:var(--rsm);font-size:13px;font-family:'Barlow',sans-serif;font-weight:600;cursor:pointer;color:var(--text);display:inline-flex;align-items:center;gap:6px;transition:all .15s}
+.btn-g:hover{background:var(--off)}
+.btn-sm{padding:5px 11px;font-size:12px}
+.btn-danger{background:transparent;border:1.5px solid var(--red);padding:5px 11px;border-radius:var(--rsm);font-size:12px;font-family:'Barlow',sans-serif;cursor:pointer;color:var(--red);font-weight:600;display:inline-flex;align-items:center;gap:5px}
+.filter-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem}
+.filter-btn{padding:5px 13px;font-size:11px;border:1.5px solid var(--border2);border-radius:20px;background:transparent;cursor:pointer;color:var(--text2);font-family:'Barlow',sans-serif;font-weight:700;letter-spacing:.04em;text-transform:uppercase;transition:all .15s}
+.filter-btn.active{background:var(--navy);color:var(--lime);border-color:var(--navy)}
+.overlay{position:fixed;inset:0;background:rgba(19,21,43,0.65);z-index:200;display:none;align-items:flex-end;justify-content:center;backdrop-filter:blur(3px)}
+.overlay.open{display:flex}
+.sheet{background:var(--white);width:100%;max-width:740px;border-radius:var(--r) var(--r) 0 0;padding:1.5rem;max-height:92vh;overflow-y:auto;animation:slideUp .22s ease;border-top:4px solid var(--lime)}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.sheet-title{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;color:var(--navy);margin-bottom:1.25rem;display:flex;align-items:center;justify-content:space-between}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:480px){.form-grid{grid-template-columns:1fr}}
+.form-group{margin-bottom:1rem}.form-group.full{grid-column:1/-1}
+.form-label{font-size:11px;font-weight:700;color:var(--text2);display:block;margin-bottom:4px;text-transform:uppercase;letter-spacing:.05em}
+.form-input,.form-select{width:100%;padding:9px 12px;border:1.5px solid var(--border2);border-radius:var(--rsm);font-size:13px;font-family:'Barlow',sans-serif;background:var(--white);color:var(--text)}
+.form-input:focus,.form-select:focus{outline:none;border-color:var(--sky)}
+select{padding:7px 11px;border:1px solid var(--border2);border-radius:var(--rsm);font-size:13px;font-family:'Barlow',sans-serif;background:var(--white);color:var(--text);cursor:pointer}
+.score-bar{padding:1rem 1.25rem;background:var(--navy);display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.score-lbl{font-size:10px;color:rgba(255,255,255,0.55);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px}
+.score-big{font-family:'Barlow Condensed',sans-serif;font-size:30px;font-weight:800;color:#fff}
+.audit-items{padding:.5rem 1.25rem}
+.audit-item{display:flex;align-items:flex-start;gap:12px;padding:.625rem 0;border-bottom:1px solid var(--border)}
+.audit-item:last-child{border-bottom:none}
+.audit-text{flex:1;font-size:13px;color:var(--text);line-height:1.45;font-weight:500}
+.audit-note{font-size:11px;color:var(--amber);margin-top:3px;font-style:italic}
+.pts-group{display:flex;align-items:center;gap:5px;flex-shrink:0}
+.pts-btn{width:28px;height:28px;border:1.5px solid var(--border2);border-radius:7px;background:transparent;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;color:var(--text2);transition:all .12s}
+.pts-btn.ok{background:var(--green-lt);border-color:var(--green);color:var(--green)}
+.pts-btn.fail{background:var(--red-lt);border-color:var(--red);color:var(--red)}
+.pts-val{font-size:11px;color:var(--text2);min-width:32px;text-align:center}
+.inc-card{background:var(--white);border-radius:var(--r);border:1px solid var(--border);margin-bottom:.875rem;box-shadow:var(--shadow);overflow:hidden}
+.inc-card.urgent{border-color:var(--red);box-shadow:0 2px 12px rgba(226,75,74,0.15)}
+.inc-header{padding:.75rem 1rem;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:10px}
+.prio-stripe{width:4px;border-radius:2px;align-self:stretch;flex-shrink:0}
+.inc-title{font-size:13px;font-weight:700;color:var(--text);line-height:1.4}
+.inc-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:5px}
+.meta-item{font-size:11px;color:var(--text2);display:flex;align-items:center;gap:3px}
+.inc-body{padding:.875rem 1rem}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.detail-field{background:var(--off);border-radius:var(--rsm);padding:.5rem .75rem;border:1px solid var(--border)}
+.detail-lbl{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px;font-weight:700}
+.detail-val{font-size:13px;font-weight:700;color:var(--text)}
+.inc-actions{display:flex;gap:7px;flex-wrap:wrap;padding-top:10px;border-top:1px solid var(--border)}
+.dias-warn{color:var(--red);font-weight:700}
+.summary-row{display:flex;align-items:center;justify-content:space-between;padding:.625rem 0;border-bottom:1px solid var(--border)}
+.summary-row:last-child{border-bottom:none}
+.day-col{background:var(--white);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:.75rem;box-shadow:var(--shadow)}
+.day-col.today{border-color:var(--lime);border-width:2px}
+.day-header{padding:.625rem 1.1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--navy)}
+.day-name{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;color:var(--lime);text-transform:uppercase;letter-spacing:.08em}
+.worker-block{border-bottom:1px solid var(--border)}
+.worker-block:last-child{border-bottom:none}
+.worker-header{padding:.5rem 1.1rem;display:flex;align-items:center;gap:8px;background:var(--off);border-bottom:1px solid var(--border)}
+.worker-avatar{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0}
+.worker-name{font-size:12px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.02em}
+.worker-hours{font-size:11px;color:var(--text2);margin-left:auto;font-weight:600}
+.entry-row{padding:.5rem 1.1rem;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:8px}
+.entry-row:last-child{border-bottom:none}
+.entry-dot{width:7px;height:7px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.entry-text{font-size:12px;color:var(--text);flex:1;line-height:1.45;font-weight:500}
+.entry-meta{font-size:11px;color:var(--text2);margin-top:2px}
+.entry-badge{font-size:10px;padding:2px 7px;border-radius:8px;font-weight:700}
+.empty-day{padding:1rem 1.1rem;font-size:12px;color:var(--text3);font-style:italic}
+.inc-tag{background:var(--red-lt);color:var(--red-dk);font-size:11px;padding:4px 10px;border-radius:8px;font-weight:700;display:inline-flex;align-items:center;gap:4px;margin:4px 1.1rem}
+.note-tag{background:var(--sky-lt);color:var(--sky2);font-size:11px;padding:4px 10px;border-radius:8px;display:inline-flex;align-items:center;gap:4px;margin:0 1.1rem .625rem}
+.dj-row{display:flex;gap:8px;align-items:flex-start;margin-bottom:.625rem;padding:.75rem;background:var(--off);border-radius:var(--rsm);border:1px solid var(--border)}
+.empty{text-align:center;padding:2.5rem 1rem;color:var(--text2)}
+.empty i{font-size:36px;margin-bottom:12px;display:block;color:var(--text3)}
+.page-footer{display:flex;gap:10px;flex-wrap:wrap;padding:0 1.25rem 1.25rem}
+</style>
+</head>
+<body>
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-head">
+      <div class="login-icon"><i class="ti ti-shield-check"></i></div>
+      <div class="login-title">SIMÓN VERDE SPORT</div>
+      <div class="login-sub">Control de Mantenimiento</div>
+    </div>
+    <div class="login-body">
+      <div class="login-label">Selecciona tu nombre para entrar</div>
+      <div id="login-users"></div>
+    </div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app-shell">
+  <header class="app-header">
+    <div class="logo">
+      <div class="logo-mark"><i class="ti ti-shield-check"></i></div>
+      <div><div class="logo-text">SIMÓN VERDE SPORT</div><div class="logo-sub">Mantenimiento 2026</div></div>
+    </div>
+    <div class="header-user">
+      <span id="sync-status" style="font-size:11px;color:var(--green);transition:opacity 1s;opacity:0;white-space:nowrap"></span>
+      <div><div class="header-name" id="h-name">—</div><div class="header-role" id="h-role">—</div></div>
+      <div class="header-avatar" id="h-avatar">—</div>
+      <button class="btn-logout" onclick="logout()"><i class="ti ti-logout"></i> Salir</button>
+    </div>
+  </header>
+  <nav class="app-nav" id="app-nav"></nav>
+  <main class="app-body">
+
+    <!-- RESUMEN -->
+    <div id="page-resumen" class="page">
+      <div class="kpi-grid">
+        <div class="kpi"><div class="kpi-label">Brand Standard</div><div class="kpi-value ca" id="kpi-bs-pct">58%</div><div class="kpi-sub" id="kpi-bs-sub">Mar 2026</div></div>
+        <div class="kpi"><div class="kpi-label">Zonas críticas</div><div class="kpi-value cr" id="kpi-criticas">3</div><div class="kpi-sub">por debajo del 50%</div></div>
+        <div class="kpi"><div class="kpi-label">Incidencias abiertas</div><div class="kpi-value cr" id="kpi-inc-open">4</div><div class="kpi-sub" id="kpi-inc-urg">2 urgentes</div></div>
+        <div class="kpi"><div class="kpi-label">Más antigua</div><div class="kpi-value ca" id="kpi-oldest">55d</div><div class="kpi-sub">Ludoteca</div></div>
+      </div>
+      <div class="alert alert-r"><strong>Jardín y Otros: 29%</strong> — Ludoteca, carpa, pádel y protocolo preventivo en estado crítico.</div>
+      <div class="alert alert-a"><strong>Spinning: 44% dos meses seguidos</strong> — Displays bicis, focos y humedades sin resolver.</div>
+      <div class="card">
+        <div class="card-header"><span class="card-title"><i class="ti ti-map-pin"></i> Estado por zonas — marzo 2026</span></div>
+        <div id="resumen-zones"></div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span class="card-title"><i class="ti ti-alert-triangle"></i> Incidencias urgentes activas</span></div>
+        <div id="resumen-urg"></div>
+      </div>
+    </div>
+
+    <!-- BRAND STANDARD -->
+    <div id="page-brandstandard" class="page">
+      <div class="card" style="margin-bottom:1rem">
+        <div style="padding:.875rem 1.25rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+          <div>
+            <div style="font-size:11px;font-weight:700;color:var(--sky);letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px">Mes de auditoría</div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;color:var(--navy)" id="bs-mes-label">Mayo 2026</div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <button class="btn-g btn-sm" onclick="bsChangeMes(-1)"><i class="ti ti-chevron-left"></i></button>
+            <button class="btn-g btn-sm" onclick="bsChangeMes(1)"><i class="ti ti-chevron-right"></i></button>
+            <button class="btn-p" onclick="bsNuevaAuditoria()" id="bs-nueva-btn" style="display:none"><i class="ti ti-plus"></i> Nueva auditoría</button>
+          </div>
+        </div>
+        <div id="bs-mes-estado" style="padding:0 1.25rem .875rem"></div>
+      </div>
+      <div class="card" id="bs-global-card" style="display:none;margin-bottom:1rem">
+        <div style="background:var(--navy);padding:1rem 1.25rem;display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+          <div><div style="font-size:10px;color:rgba(255,255,255,0.5);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px">Puntuación total</div><div style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:var(--lime)" id="bs-g-score">—</div></div>
+          <div><div style="font-size:10px;color:rgba(255,255,255,0.5);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px">% Global</div><div style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800" id="bs-g-pct">—</div></div>
+          <div><div style="font-size:10px;color:rgba(255,255,255,0.5);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px">Zonas en verde</div><div style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:var(--lime)" id="bs-g-verdes">—</div></div>
+          <div><div style="font-size:10px;color:rgba(255,255,255,0.5);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px">Zonas críticas</div><div style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:var(--red)" id="bs-g-criticas">—</div></div>
+        </div>
+      </div>
+      <div id="bs-resumen-mes" class="card">
+        <div class="card-header"><span class="card-title"><i class="ti ti-chart-bar"></i> Resumen por zonas</span><span id="bs-total-badge" class="badge bb">—</span></div>
+        <div style="padding:.75rem 1.25rem" id="bs-summary"></div>
+        <div id="bs-resumen-footer" style="padding:0 1.25rem 1.25rem"></div>
+      </div>
+      <div id="bs-audit-panel" style="display:none">
+        <div id="bs-readonly-notice" class="alert alert-b" style="display:none;margin-bottom:.5rem">
+          <i class="ti ti-eye"></i> <strong>Modo consulta</strong> — Solo Orestes y Julian pueden modificar el Brand Standard.
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title"><i class="ti ti-clipboard-list"></i> Auditoría zona a zona</span>
+            <select id="zone-sel" onchange="loadAudit(this.value)" style="font-size:12px">
+              <option value="ext">Exteriores y Parking</option>
+              <option value="vesph">Vestuario Piscina — Hombres</option>
+              <option value="vespm">Vestuario Piscina — Mujeres</option>
+              <option value="vessh">Vestuario Seco — Hombres</option>
+              <option value="vessm">Vestuario Seco — Mujeres</option>
+              <option value="fit">Sala Fitness</option>
+              <option value="grande">Sala Grande</option>
+              <option value="spin">Sala Spinning</option>
+              <option value="cross">Sala Crossfit</option>
+              <option value="pilates">Sala Pilates Reformer</option>
+              <option value="mediana">Sala Mediana</option>
+              <option value="piscina">Piscina y Spa</option>
+              <option value="jardin">Jardinería y Otros</option>
+            </select>
+          </div>
+          <div class="score-bar">
+            <div><div class="score-lbl">Puntuación</div><div class="score-big" id="bs-score">— / —</div></div>
+            <div><div class="score-lbl">% Éxito</div><div style="font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;color:var(--lime)" id="bs-pct">—</div></div>
+            <div><div class="score-lbl">Bonificación</div><div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:var(--lime)" id="bs-bonus">—</div></div>
+          </div>
+          <div id="bs-progress" style="padding:.5rem 1.25rem;font-size:11px;font-weight:600;border-bottom:1px solid var(--border)"></div>
+          <div class="audit-items" id="bs-items"></div>
+          <div class="page-footer" style="padding-top:.5rem;gap:8px" id="bs-save-footer">
+            <button class="btn-p" onclick="saveAudit()" id="bs-save-btn"><i class="ti ti-device-floppy"></i> Guardar zona</button>
+            <button class="btn-g" onclick="bsVolverResumen()"><i class="ti ti-arrow-left"></i> Volver al resumen</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INCIDENCIAS -->
+    <div id="page-incidencias" class="page">
+      <div class="kpi-grid">
+        <div class="kpi"><div class="kpi-label">Abiertas</div><div class="kpi-value cr" id="i-open">4</div></div>
+        <div class="kpi"><div class="kpi-label">En gestión</div><div class="kpi-value ca" id="i-prog">2</div></div>
+        <div class="kpi"><div class="kpi-label">Cerradas mes</div><div class="kpi-value cg" id="i-done">3</div></div>
+        <div class="kpi"><div class="kpi-label">Coste estimado</div><div class="kpi-value cn" id="i-cost" style="font-size:18px;margin-top:3px">1.180€</div></div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.875rem;gap:10px;flex-wrap:wrap">
+        <div class="filter-bar" style="margin-bottom:0">
+          <button class="filter-btn active" onclick="setFilter('todas',this)">Todas</button>
+          <button class="filter-btn" onclick="setFilter('red',this)">🔴 Urgente</button>
+          <button class="filter-btn" onclick="setFilter('amber',this)">🟡 Media</button>
+          <button class="filter-btn" onclick="setFilter('Abierta',this)">Abiertas</button>
+          <button class="filter-btn" onclick="setFilter('En gestión',this)">En gestión</button>
+          <button class="filter-btn" onclick="setFilter('Cerrada',this)">Cerradas</button>
+        </div>
+        <button class="btn-p btn-sm" onclick="openSheet('inc-overlay')"><i class="ti ti-plus"></i> Nueva</button>
+      </div>
+      <div id="inc-list"></div>
+    </div>
+
+    <!-- TAREAS -->
+    <div id="page-tareas" class="page">
+      <div class="kpi-grid">
+        <div class="kpi"><div class="kpi-label">Total tareas</div><div class="kpi-value cn" id="t-total">0</div></div>
+        <div class="kpi"><div class="kpi-label">Horas estimadas</div><div class="kpi-value cr" id="t-horas">0h</div></div>
+        <div class="kpi"><div class="kpi-label">Urgencias</div><div class="kpi-value cr" id="t-urg">0</div></div>
+        <div class="kpi"><div class="kpi-label">Coste externo</div><div class="kpi-value cs" id="t-coste" style="font-size:18px;margin-top:3px">—</div></div>
+      </div>
+      <div class="alert alert-a" id="t-arrastradas-alert" style="display:none"></div>
+      <div class="alert alert-r"><strong>Déficit horas acumulado</strong> — Ene: -88.5h · Feb: -107.5h · Mar: -253h · Abr: -245h. Valorar refuerzo del equipo.</div>
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:1rem;justify-content:space-between">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;width:100%">
+          <div id="meses-filter" style="display:flex;gap:6px;flex-wrap:wrap;flex:1"></div>
+          <button class="btn-p btn-sm" onclick="openSheet('tarea-overlay')"><i class="ti ti-plus"></i> Nueva tarea</button>
+        </div>
+        <select id="t-zona-sel" onchange="renderTareas()" style="font-size:12px">
+          <option value="TODAS">Todas las zonas</option>
+          <option value="URGENCIAS">🔴 Urgencias</option>
+          <option value="PISCINA">Piscina y Spa</option>
+          <option value="FITNESS">Sala Fitness</option>
+          <option value="COLECTIVAS">Clases Colectivas</option>
+          <option value="VESTUARIOS">Vestuarios</option>
+          <option value="OTROS">Otros / Exterior</option>
+        </select>
+      </div>
+      <div id="tareas-list"></div>
+      <div style="margin-top:1rem"><button class="btn-p" onclick="openSheet('tarea-overlay')"><i class="ti ti-plus"></i> Añadir tarea</button></div>
+    </div>
+
+    <!-- DIARIO -->
+    <div id="page-diario" class="page">
+      <div class="card" style="margin-bottom:1rem">
+        <div style="padding:.875rem 1.25rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <button class="btn-g btn-sm" onclick="prevWeek()"><i class="ti ti-chevron-left"></i></button>
+            <span style="font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:700;color:var(--navy)" id="week-label">—</span>
+            <button class="btn-g btn-sm" onclick="nextWeek()"><i class="ti ti-chevron-right"></i></button>
+          </div>
+          <div style="display:flex;gap:6px">
+            <button class="filter-btn active" onclick="setDiarioView('semana',this)">Semanal</button>
+            <button class="filter-btn" onclick="setDiarioView('jose',this)">Jose</button>
+            <button class="filter-btn" onclick="setDiarioView('manuel',this)">Manuel</button>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);background:var(--navy3);border-top:1px solid var(--border)">
+          <div style="padding:.875rem 1rem;border-right:1px solid rgba(255,255,255,0.1)"><div style="font-size:10px;color:rgba(255,255,255,0.5);font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px">Jose — horas</div><div style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800;color:var(--lime)" id="d-jose-h">0h</div><div style="font-size:11px;color:rgba(255,255,255,0.5)" id="d-jose-pct">de 35h</div></div>
+          <div style="padding:.875rem 1rem;border-right:1px solid rgba(255,255,255,0.1)"><div style="font-size:10px;color:rgba(255,255,255,0.5);font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px">Manuel — horas</div><div style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800;color:var(--lime)" id="d-manuel-h">0h</div><div style="font-size:11px;color:rgba(255,255,255,0.5)" id="d-manuel-pct">de 35h</div></div>
+          <div style="padding:.875rem 1rem;border-right:1px solid rgba(255,255,255,0.1)"><div style="font-size:10px;color:rgba(255,255,255,0.5);font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px">Tareas completadas</div><div style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800;color:var(--lime)" id="d-done">0</div></div>
+          <div style="padding:.875rem 1rem"><div style="font-size:10px;color:rgba(255,255,255,0.5);font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px">Incidencias detectadas</div><div style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800;color:var(--red)" id="d-inc">0</div></div>
+        </div>
+      </div>
+      <div id="diario-content"></div>
+      <div style="margin-top:.5rem"><button class="btn-p" onclick="openDiarioForm()"><i class="ti ti-plus"></i> Registrar jornada</button></div>
+    </div>
+  </main>
+</div>
+
+<!-- OVERLAYS -->
+<div class="overlay" id="inc-overlay" onclick="if(event.target===this)closeSheet('inc-overlay')">
+  <div class="sheet">
+    <div class="sheet-title"><span><i class="ti ti-plus" style="color:var(--sky);margin-right:6px"></i>Nueva incidencia</span><button class="btn-g btn-sm" onclick="closeSheet('inc-overlay')"><i class="ti ti-x"></i></button></div>
+    <div class="form-grid">
+      <div class="form-group full"><label class="form-label">Descripción del problema</label><input class="form-input" id="f-desc" type="text" placeholder="¿Qué ha pasado?"></div>
+      <div class="form-group"><label class="form-label">Zona</label><select class="form-select" id="f-zona"><option>Exteriores y Parking</option><option>Vestuario Piscina Hombres</option><option>Vestuario Piscina Mujeres</option><option>Vestuario Seco Hombres</option><option>Vestuario Seco Mujeres</option><option>Sala Fitness</option><option>Sala Grande</option><option>Spinning</option><option>Crossfit</option><option>Pilates Reformer</option><option>Sala Mediana</option><option>Piscina y Spa</option><option>Jardinería y Otros</option></select></div>
+      <div class="form-group"><label class="form-label">Prioridad</label><select class="form-select" id="f-prio"><option value="red">🔴 Urgente — hoy</option><option value="amber">🟡 Media — esta semana</option><option value="green">🟢 Baja — próximo preventivo</option></select></div>
+      <div class="form-group"><label class="form-label">Responsable</label><select class="form-select" id="f-resp"><option>Orestes</option><option>Julian</option><option>Jose</option><option>Manuel</option><option>Jennifer</option><option>Antonio</option><option>Empresa externa</option></select></div>
+      <div class="form-group"><label class="form-label">Tipo</label><select class="form-select" id="f-tipo"><option>Correctivo</option><option>Preventivo</option><option>Externo</option></select></div>
+      <div class="form-group"><label class="form-label">Horas estimadas</label><input class="form-input" id="f-horas" type="number" min="0" step="0.5"></div>
+      <div class="form-group"><label class="form-label">Coste estimado (€)</label><input class="form-input" id="f-coste" type="number" min="0"></div>
+      <div class="form-group full"><label class="form-label">Notas adicionales</label><input class="form-input" id="f-nota" type="text" placeholder="Contexto, proveedor, piezas..."></div>
+    </div>
+    <div style="display:flex;gap:8px"><button class="btn-p" onclick="addInc()"><i class="ti ti-check"></i> Registrar</button><button class="btn-g" onclick="closeSheet('inc-overlay')">Cancelar</button></div>
+  </div>
+</div>
+
+<div class="overlay" id="tarea-overlay" onclick="if(event.target===this)closeSheet('tarea-overlay')">
+  <div class="sheet">
+    <div class="sheet-title"><span><i class="ti ti-plus" style="color:var(--sky);margin-right:6px"></i>Nueva tarea</span><button class="btn-g btn-sm" onclick="closeSheet('tarea-overlay')"><i class="ti ti-x"></i></button></div>
+    <div class="form-grid">
+      <div class="form-group full"><label class="form-label">Descripción</label><input class="form-input" id="tf-desc" type="text" placeholder="¿Qué hay que hacer?"></div>
+      <div class="form-group"><label class="form-label">Zona</label><select class="form-select" id="tf-zona"><option value="PISCINA">Piscina y Spa</option><option value="FITNESS">Sala Fitness</option><option value="COLECTIVAS">Clases Colectivas</option><option value="VESTUARIOS">Vestuarios</option><option value="OTROS">Otros / Exterior</option></select></div>
+      <div class="form-group"><label class="form-label">Prioridad</label><select class="form-select" id="tf-prio"><option value="urgente">🔴 Urgente</option><option value="normal" selected>🟡 Normal</option><option value="baja">🟢 Baja</option></select></div>
+      <div class="form-group"><label class="form-label">Responsable</label><select class="form-select" id="tf-resp"><option>Orestes</option><option>Julian</option><option>Jose</option><option>Manuel</option><option>Jennifer</option><option>Antonio</option><option>Empresa externa</option></select></div>
+      <div class="form-group"><label class="form-label">Horas estimadas</label><input class="form-input" id="tf-horas" type="number" min="0" step="0.5"></div>
+      <div class="form-group"><label class="form-label">Presupuesto (€)</label><input class="form-input" id="tf-coste" type="number" min="0"></div>
+      <div class="form-group full"><label class="form-label">Comentarios</label><input class="form-input" id="tf-comment" type="text" placeholder="Proveedor, piezas, contexto..."></div>
+    </div>
+    <div style="display:flex;gap:8px"><button class="btn-p" onclick="addTarea()"><i class="ti ti-check"></i> Registrar</button><button class="btn-g" onclick="closeSheet('tarea-overlay')">Cancelar</button></div>
+  </div>
+</div>
+
+<div class="overlay" id="diario-overlay" onclick="if(event.target===this)closeSheet('diario-overlay')">
+  <div class="sheet" style="max-height:92vh">
+    <div class="sheet-title"><span><i class="ti ti-notebook" style="color:var(--navy);margin-right:6px"></i>Registrar jornada</span><button class="btn-g btn-sm" onclick="closeSheet('diario-overlay')"><i class="ti ti-x"></i></button></div>
+    <div class="form-grid">
+      <div class="form-group"><label class="form-label">Trabajador</label><select class="form-select" id="dj-quien"><option value="Jose">Jose</option><option value="Manuel">Manuel</option></select></div>
+      <div class="form-group"><label class="form-label">Fecha</label><input class="form-input" id="dj-fecha" type="date"></div>
+    </div>
+    <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:.75rem"><i class="ti ti-list-check" style="margin-right:5px"></i>Tareas realizadas</div>
+    <div id="dj-tareas-list"></div>
+    <button class="btn-g btn-sm" onclick="addDjTarea()" style="margin-bottom:1rem"><i class="ti ti-plus"></i> Añadir tarea</button>
+    <div style="border-top:1px solid var(--border);padding-top:1rem;margin-bottom:.875rem">
+      <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:.75rem"><i class="ti ti-alert-triangle" style="color:var(--amber);margin-right:5px"></i>Incidencias detectadas durante la jornada</div>
+      <textarea class="form-input" id="dj-incidencias" rows="2" placeholder="Ej: Fuga detectada en spa, luz fundida..."></textarea>
+    </div>
+    <div style="margin-bottom:1rem">
+      <label class="form-label"><i class="ti ti-message-2" style="margin-right:4px"></i>Notas generales del día</label>
+      <textarea class="form-input" id="dj-notas" rows="2" placeholder="Observaciones, imprevistos..."></textarea>
+    </div>
+    <div style="display:flex;gap:8px"><button class="btn-p" onclick="saveDiario()"><i class="ti ti-device-floppy"></i> Guardar jornada</button><button class="btn-g" onclick="closeSheet('diario-overlay')">Cancelar</button></div>
+  </div>
+</div>
+<script>
+// ═══ USUARIOS ═══
+var USUARIOS = [
+  {id:'orestes',  nombre:'Orestes',  rol:'Director',        avatar:'OR', color:'#26294C', sec:['resumen','brandstandard','incidencias','tareas','diario'], canEditBS:true},
+  {id:'julian',   nombre:'Julian',   rol:'Coordinador',     avatar:'JU', color:'#0A75B9', sec:['resumen','brandstandard','incidencias','tareas','diario'], canEditBS:true},
+  {id:'jose',     nombre:'Jose',     rol:'Operario',        avatar:'JO', color:'#2e9e5b', sec:['resumen','brandstandard','incidencias','tareas','diario'], canEditBS:false},
+  {id:'manuel',   nombre:'Manuel',   rol:'Operario',        avatar:'MA', color:'#2e9e5b', sec:['resumen','brandstandard','incidencias','tareas','diario'], canEditBS:false},
+  {id:'jennifer', nombre:'Jennifer', rol:'Coord. Piscina',  avatar:'JE', color:'#818F18', sec:['resumen','brandstandard','incidencias','tareas','diario'], canEditBS:false},
+  {id:'antonio',  nombre:'Antonio',  rol:'Coord. Fitness',  avatar:'AN', color:'#818F18', sec:['resumen','brandstandard','incidencias','tareas','diario'], canEditBS:false}
+];
+var currentUser = null;
+var REGISTRO = [];
+
+function isAdmin(){ return currentUser && (currentUser.id==='orestes'||currentUser.id==='julian'); }
+function canEditBrandStandard(){ return currentUser && currentUser.canEditBS===true; }
+function logAction(a,d){ if(currentUser) REGISTRO.unshift({usuario:currentUser.nombre,rol:currentUser.rol,accion:a,detalle:d,fecha:new Date().toLocaleString('es-ES')}); }
+
+function renderLoginUsers(){
+  var wrap = document.getElementById('login-users');
+  wrap.innerHTML = '';
+  USUARIOS.forEach(function(u){
+    var btn = document.createElement('button');
+    btn.className = 'user-btn';
+    btn.innerHTML = '<div class="user-avatar" style="background:'+u.color+'">'+u.avatar+'</div>'+
+      '<div style="flex:1"><div class="user-name">'+u.nombre+'</div><div class="user-role">'+u.rol+'</div></div>'+
+      '<i class="ti ti-chevron-right" style="font-size:18px;color:#a0a3be"></i>';
+    btn.addEventListener('click', function(){ loginAs(u.id); });
+    wrap.appendChild(btn);
+  });
+}
+
+function loginAs(userId){
+  currentUser = null;
+  for(var i=0;i<USUARIOS.length;i++){ if(USUARIOS[i].id===userId){ currentUser=USUARIOS[i]; break; } }
+  if(!currentUser) return;
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('app-shell').style.display = 'block';
+  document.getElementById('h-name').textContent = currentUser.nombre;
+  document.getElementById('h-role').textContent = currentUser.rol;
+  var av = document.getElementById('h-avatar');
+  av.textContent = currentUser.avatar;
+  av.style.background = currentUser.color;
+  renderNav();
+  var firstPage = currentUser.sec[0];
+  var firstBtn = document.querySelector('.nav-btn[data-page="'+firstPage+'"]');
+  if(firstBtn) showPage(firstPage, firstBtn);
+  // Cargar datos del Sheet
+  if(SHEETS_URL) cargarDatosDelSheet();
+}
+
+function logout(){
+  currentUser = null;
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('app-shell').style.display = 'none';
+}
+
+function renderNav(){
+  var pages = [
+    {id:'resumen',       label:'Resumen',        icon:'ti-layout-dashboard'},
+    {id:'brandstandard', label:'Brand Standard', icon:'ti-clipboard-list'},
+    {id:'incidencias',   label:'Incidencias',    icon:'ti-alert-triangle'},
+    {id:'tareas',        label:'Tareas',         icon:'ti-checklist'},
+    {id:'diario',        label:'Diario',         icon:'ti-notebook'}
+  ];
+  var nav = document.getElementById('app-nav');
+  nav.innerHTML = '';
+  pages.filter(function(p){ return currentUser.sec.indexOf(p.id)>-1; }).forEach(function(p){
+    var btn = document.createElement('button');
+    btn.className = 'nav-btn';
+    btn.setAttribute('data-page', p.id);
+    var badge = p.id==='incidencias' ? ' <span class="nav-badge" id="nav-badge">0</span>' :
+                p.id==='tareas'      ? ' <span class="nav-badge" id="nav-badge-tareas" style="background:var(--sky)">0</span>' : '';
+    btn.innerHTML = '<i class="ti '+p.icon+'"></i> '+p.label+badge;
+    btn.addEventListener('click', function(){ showPage(p.id, btn); });
+    nav.appendChild(btn);
+  });
+}
+
+function showPage(p, btn){
+  document.querySelectorAll('.page').forEach(function(x){ x.classList.remove('active'); });
+  document.querySelectorAll('.nav-btn').forEach(function(x){ x.classList.remove('active'); });
+  var pg = document.getElementById('page-'+p);
+  if(pg) pg.classList.add('active');
+  if(btn) btn.classList.add('active');
+  if(p==='resumen')       { renderResumen(); renderUrgentes(); }
+  if(p==='brandstandard') { bsRenderMes(); }
+  if(p==='incidencias')   { renderIncs(); }
+  if(p==='tareas')        { buildMesesFilter(); renderTareas(); }
+  if(p==='diario')        { renderDiario(); }
+}
+
+function openSheet(id){ document.getElementById(id).classList.add('open'); }
+function closeSheet(id){ document.getElementById(id).classList.remove('open'); }
+
+// ═══ ZONAS DATA ═══
+var vesp_items = [
+  {t:'Registro de limpieza en entrada, papeleras no llenas',max:20,note:'Insistir en legibilidad y horario actualizado'},
+  {t:'Bancos en buen estado, sin entorpecer circulación',max:20},
+  {t:'Temperatura agradable (24-27° abr-oct / 20-24° nov-mar)',max:20},
+  {t:'Fenólicos y herrajes en perfecto estado, puertas ajustan bien',max:20,note:'Primera ducha derecha descuadrada'},
+  {t:'Taquillas con número, bisagras, limpieza interior y percha',max:20},
+  {t:'Pavimentos y suelos de duchas limpios y sin deterioro',max:20,note:'Primera ducha izquierda con agujeros'},
+  {t:'Suelos, paredes y techos en buen estado de pintura',max:20,note:'Techos negros — repaso urgente'},
+  {t:'Secadores de pelo operativos',max:20,note:'Ha desaparecido uno'},
+  {t:'Señalización correcta (emergencia, BIES)',max:20},
+  {t:'Equipo de ventilación operativo',max:20,note:'Techo de ventilación sigue abierto'},
+  {t:'Grifería y duchas con presión y temperatura correctas',max:20,note:'Grifo central sin agua caliente'}
+];
+var vess_items = [
+  {t:'Registro de limpieza en entrada, papeleras no llenas',max:20,note:'Horario no actualizado'},
+  {t:'Bancos en buen estado y sin entorpecer la circulación',max:20,note:'Deterioro de pintura'},
+  {t:'Temperatura agradable (24-27° abr-oct / 20-24° nov-mar)',max:20},
+  {t:'Fenólicos y herrajes en perfecto estado',max:20},
+  {t:'Taquillas con número, bisagras y percha',max:20,note:'Taquillas 2,4,6 sin cerradura'},
+  {t:'Pavimentos correctos y suelos de duchas limpios',max:20},
+  {t:'Suelos, paredes y techos en buen estado de pintura',max:20,note:'Falta pintura — techos duchas negros'},
+  {t:'Secadores de pelo operativos',max:20},
+  {t:'Señalización correcta',max:20},
+  {t:'Equipo de ventilación operativo',max:20},
+  {t:'Grifería y duchas con presión y temperatura correctas',max:20,note:'Grifo tarda en cortar'}
+];
+
+function cloneItems(arr){ return arr.map(function(i){ return {t:i.t,max:i.max,note:i.note}; }); }
+
+var ZONES = [
+  {id:'ext',    name:'Exteriores y Parking',        icon:'ti-car',                mar:70,  marT:110, items:[
+    {t:'Rótulo visible e iluminado en horas nocturnas',max:20},
+    {t:'Lonas de valla colocadas, parking libre de objetos',max:20},
+    {t:'Parking pintado, señalizado y luces funcionando',max:20,note:'Luces no operativas'},
+    {t:'Tornos de acceso funcionan correctamente',max:10},
+    {t:'Marquesina en perfecto estado, sin óxidos',max:20,note:'Sigue sin pintar'},
+    {t:'Jardinería: plantas y árboles en perfecto estado',max:20}
+  ]},
+  {id:'vesph',  name:'Vestuario Piscina — Hombres', icon:'ti-droplet',            mar:80,  marT:110, items:cloneItems(vesp_items)},
+  {id:'vespm',  name:'Vestuario Piscina — Mujeres', icon:'ti-droplet',            mar:80,  marT:110, items:cloneItems(vesp_items)},
+  {id:'vessh',  name:'Vestuario Seco — Hombres',    icon:'ti-shirt',              mar:70,  marT:110, items:cloneItems(vess_items)},
+  {id:'vessm',  name:'Vestuario Seco — Mujeres',    icon:'ti-shirt',              mar:70,  marT:110, items:cloneItems(vess_items)},
+  {id:'fit',    name:'Sala Fitness',                icon:'ti-barbell',            mar:150, marT:190, items:[
+    {t:'Temperatura agradable',max:10},
+    {t:'Red Wifi abierta operativa para socios',max:20,note:'No operativa'},
+    {t:'Máquinas cardio operativas o incidencia enviada a BH',max:10},
+    {t:'Fuente de agua funciona y en buen estado',max:10},
+    {t:'Suelos sin grietas en caucho, sin regletas sueltas',max:10},
+    {t:'Buen estado de pinturas en paredes y techos',max:10,note:'Desperfectos en techos'},
+    {t:'Iluminación adecuada, sin luces fundidas',max:10},
+    {t:'Ninguna máquina fuera de servicio',max:30,note:'Abdominal fuera de servicio — tapizados pendientes'},
+    {t:'Música ambiente operativa',max:20},
+    {t:'Señalización correcta',max:10},
+    {t:'Aseos limpios, con papel, jabón, grifos y secador',max:20},
+    {t:'WC funcionan correctamente',max:20},
+    {t:'Inbody funciona correctamente',max:10}
+  ]},
+  {id:'grande', name:'Sala Grande',                 icon:'ti-building-community', mar:60,  marT:70, items:[
+    {t:'Equipos de clima funcionan y filtros limpios',max:10},
+    {t:'Equipo de música y limitador de sonido operativos',max:20},
+    {t:'Ventilación: rejillas libres de polvo',max:10},
+    {t:'Iluminación adecuada, sin luces fundidas',max:10},
+    {t:'Suelos, paredes y techos en perfecto estado',max:10,note:'Desperfectos de humedad'},
+    {t:'Señalización correcta',max:10}
+  ]},
+  {id:'spin',   name:'Sala Spinning',               icon:'ti-bike',               mar:40,  marT:90, items:[
+    {t:'Equipos de clima funcionan y filtros limpios',max:10},
+    {t:'Equipo de música funciona perfectamente',max:20},
+    {t:'Bicicletas operativas o incidencia al proveedor',max:30,note:'Displays de varias bicis rotos — 2 meses'},
+    {t:'Iluminación adecuada, sin focos fundidos',max:10,note:'Foco giratorio no funciona'},
+    {t:'Best Cycling funciona correctamente',max:10},
+    {t:'Suelos, paredes y techos en perfecto estado',max:10,note:'Columnas con humedades'},
+    {t:'Señalización correcta',max:10}
+  ]},
+  {id:'cross',  name:'Sala Crossfit',               icon:'ti-dumbbell',           mar:50,  marT:120, items:[
+    {t:'Losas bien ajustadas sin grietas',max:10},
+    {t:'Equipo de música funciona perfectamente',max:20,note:'No funciona'},
+    {t:'No hay malas hierbas',max:10,note:'Sí las hay'},
+    {t:'Barras olímpicas bien mantenidas',max:10,note:'Sin mantenimiento'},
+    {t:'Colchonetas en buen estado',max:10},
+    {t:'Rack en buen estado de conservación',max:10,note:'Falta pintura'},
+    {t:'Kettlebells pintadas',max:10,note:'Falta pintura'},
+    {t:'No hay goteras en cubierta',max:10},
+    {t:'Contenedores en buen estado',max:10,note:'Falta pintura'},
+    {t:'Máquinas de cardio operativas',max:10}
+  ]},
+  {id:'pilates',name:'Sala Pilates Reformer',       icon:'ti-yoga',               mar:10,  marT:10, items:[{t:'Equipos de clima funcionan y filtros limpios',max:10}]},
+  {id:'mediana',name:'Sala Mediana',                icon:'ti-layout-2',           mar:50,  marT:90, items:[
+    {t:'Equipos de clima funcionan y filtros limpios',max:10},
+    {t:'Equipo de música funciona perfectamente',max:20},
+    {t:'Iluminación adecuada, sin luces fundidas',max:20},
+    {t:'Suelos, paredes y techos en perfecto estado',max:20,note:'Falta pintura'},
+    {t:'Señalización correcta',max:20}
+  ]},
+  {id:'piscina',name:'Piscina y Spa',               icon:'ti-swimming',           mar:215, marT:320, items:[
+    {t:'Calidad del agua dentro de parámetros',max:20},
+    {t:'Fondo de piscina en buen estado',max:20},
+    {t:'Silla de minusválidos operativa',max:40,note:'Cambiar gomas — presencia de óxido'},
+    {t:'Cubierta cerrada sin fisuras',max:30},
+    {t:'Cerramiento correcto',max:20},
+    {t:'Duchas sin corrosión ni óxidos',max:30,note:'Cambiar grifo de pies'},
+    {t:'Spa funciona correctamente',max:30},
+    {t:'Ambiente del spa sin malos olores',max:20},
+    {t:'Paredes y techos en buen estado de pintura',max:20,note:'Mejorar pintura escalera'},
+    {t:'No se ha cerrado spa ni piscina ningún día',max:40},
+    {t:'Puertas cierran correctamente',max:30,note:'Spa sin cerradura'},
+    {t:'Iluminación adecuada',max:10},
+    {t:'Sin verdina en línea de flotación y corcheras',max:10,note:'Corcheras rotas sin repuesto'}
+  ]},
+  {id:'jardin', name:'Jardinería y Otros',          icon:'ti-trees',              mar:105, marT:360, items:[
+    {t:'Césped bien cortado',max:30},
+    {t:'Setos en buen estado de podas',max:30},
+    {t:'Almacenes bien ordenados',max:30,note:'Mejorable'},
+    {t:'Ludoteca en buen estado (suelo, paredes, pintura)',max:30,note:'CRÍTICO — requiere intervención urgente'},
+    {t:'Terraza en buen estado',max:30,note:'Mejorable'},
+    {t:'Carpa en buen estado, toldos recogidos',max:20,note:'Toldos en mal estado'},
+    {t:'Ahorro en luz/gas/agua superior a 200€ sobre previsto',max:40},
+    {t:'Pasillos en buen estado sin humedades',max:20,note:'CRÍTICO'},
+    {t:'Pádel: buen estado de las pistas',max:20,note:'Muro mejorable'},
+    {t:'Pádel: sin malas hierbas',max:20,note:'Sí las hay'},
+    {t:'Pádel: pasillo en buen estado de pinturas',max:10,note:'Sin pintar'},
+    {t:'Pádel: cuadro eléctrico permanece cerrado',max:20,note:'No está cerrado — RIESGO SEGURIDAD'},
+    {t:'Relojes de luces funcionan correctamente',max:20},
+    {t:'Protocolo preventivo al día',max:40}
+  ]}
+];
+
+// ═══ RESUMEN ═══
+function renderResumen(){
+  var saved = BS_HISTORICO['ABRIL'] || BS_HISTORICO['MARZO'];
+  if(saved){
+    var tG=0,oG=0,crit=0;
+    ZONES.forEach(function(z){
+      var sc=saved[z.id]||[];
+      var tot=z.items.reduce(function(a,i){return a+(i.max||0);},0);
+      var obt=sc.reduce(function(a,s){return a+(s>0?s:0);},0);
+      var pct=tot>0?Math.round(obt/tot*100):0;
+      tG+=tot; oG+=obt; if(pct<50) crit++;
+    });
+    var pctG=Math.round(oG/tG*100);
+    var el=document.getElementById('kpi-bs-pct');
+    if(el){el.textContent=pctG+'%'; el.className='kpi-value '+(pctG>=80?'cg':pctG>=60?'ca':'cr');}
+    var sub=document.getElementById('kpi-bs-sub');
+    if(sub) sub.textContent='Abr 2026 · '+oG+'/'+tG;
+    var ce=document.getElementById('kpi-criticas');
+    if(ce) ce.textContent=crit;
+  }
+  document.getElementById('resumen-zones').innerHTML = ZONES.map(function(z){
+    var pct=Math.round(z.mar/z.marT*100);
+    var col=pct>=80?'var(--green)':pct>=60?'var(--amber)':'var(--red)';
+    var bgc=pct>=80?'var(--green-lt)':pct>=60?'var(--amber-lt)':'var(--red-lt)';
+    var st=pct>=80?'bg':pct>=60?'ba':'br';
+    return '<div class="zone-row">'+
+      '<div class="zone-icon" style="background:'+bgc+'"><i class="ti '+z.icon+'" style="color:'+col+'"></i></div>'+
+      '<div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600;color:var(--text)">'+z.name+'</div>'+
+      '<div style="display:flex;align-items:center;gap:8px;margin-top:4px">'+
+      '<div class="bar-wrap"><div class="bar-fill" style="width:'+pct+'%;background:'+col+'"></div></div>'+
+      '<span style="font-size:11px;color:var(--text2)">'+z.mar+'/'+z.marT+' pts</span></div></div>'+
+      '<span class="badge '+st+'" style="min-width:44px;text-align:center">'+pct+'%</span></div>';
+  }).join('');
+  updateIncKpis();
+}
+
+function renderUrgentes(){
+  var urg=INCS.filter(function(i){return i.prio==='red'&&i.estado!=='Cerrada';});
+  var el=document.getElementById('resumen-urg');
+  if(!urg.length){el.innerHTML='<div class="empty"><i class="ti ti-circle-check" style="color:var(--green)"></i><div>Sin incidencias urgentes</div></div>';return;}
+  el.innerHTML=urg.map(function(i){
+    return '<div class="zone-row">'+
+      '<div style="width:4px;height:36px;background:var(--red);border-radius:2px;flex-shrink:0"></div>'+
+      '<div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--text)">'+i.desc+'</div>'+
+      '<div style="font-size:11px;color:var(--text2);margin-top:2px">'+i.zona+' · '+i.resp+
+      ' · <span class="dias-warn">'+daysSince(i.fecha)+'d abierta</span></div></div></div>';
+  }).join('');
+}
+
+// ═══ BRAND STANDARD ═══
+var auditState = {};
+var auditComments = {};
+var bsMesOffset = 0;
+var BS_MESES_ES    = ['ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE'];
+var BS_MESES_LABEL = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+
+var BS_HISTORICO = {};
+BS_HISTORICO['MARZO'] = {
+  ext:[0,20,20,0,10,0],
+  vesph:[20,20,20,10,20,0,10,0,20,0,0],vespm:[20,20,20,10,20,0,10,0,20,0,0],
+  vessh:[20,0,20,20,0,20,0,20,20,20,0],vessm:[20,0,20,20,0,20,0,20,20,20,0],
+  fit:[10,0,10,10,10,0,10,0,20,10,10,20,10],
+  grande:[10,20,10,10,0,10],spin:[10,20,0,0,10,0,10],
+  cross:[10,0,0,0,10,0,0,10,0,10],pilates:[10],mediana:[10,20,20,0,20],
+  piscina:[20,20,20,30,20,15,30,20,10,20,30,10,0],
+  jardin:[30,30,15,0,20,0,0,0,10,0,0,0,0,0]
+};
+BS_HISTORICO['ABRIL'] = {
+  ext:[0,20,20,0,10,0],
+  vesph:[20,20,20,10,20,0,10,0,20,0,0],vespm:[20,20,20,10,20,0,10,0,20,0,0],
+  vessh:[20,0,20,20,0,20,0,20,20,20,0],vessm:[20,0,20,20,0,20,0,20,20,20,0],
+  fit:[10,20,10,10,10,0,10,0,20,10,10,20,10],
+  grande:[10,20,10,10,10,10],spin:[10,20,0,0,10,0,10],
+  cross:[10,0,0,0,10,0,0,10,0,10],pilates:[10],mediana:[10,20,20,0,20],
+  piscina:[20,0,20,30,20,15,30,20,10,40,30,10,0],
+  jardin:[30,15,15,0,20,0,0,0,10,0,0,0,0,0]
+};
+
+function getBsMes(){
+  var d=new Date('2026-05-10');
+  d.setMonth(d.getMonth()+bsMesOffset);
+  return {key:BS_MESES_ES[d.getMonth()],label:BS_MESES_LABEL[d.getMonth()],year:d.getFullYear()};
+}
+function bsChangeMes(dir){ bsMesOffset+=dir; bsRenderMes(); }
+
+function bsRenderMes(){
+  var mes=getBsMes();
+  document.getElementById('bs-mes-label').textContent=mes.label+' '+mes.year;
+  document.getElementById('bs-audit-panel').style.display='none';
+  document.getElementById('bs-resumen-mes').style.display='block';
+  var saved=BS_HISTORICO[mes.key];
+  var estadoEl=document.getElementById('bs-mes-estado');
+  var nuevaBtn=document.getElementById('bs-nueva-btn');
+  var globalCard=document.getElementById('bs-global-card');
+  if(!saved){
+    estadoEl.innerHTML='<div class="alert alert-b" style="margin:0 0 .5rem"><strong>'+mes.label+' '+mes.year+'</strong> — Sin auditoría. Pulsa <strong>Nueva auditoría</strong> para comenzar.</div>';
+    nuevaBtn.innerHTML='<i class="ti ti-plus"></i> Nueva auditoría';
+    globalCard.style.display='none';
+    renderBsSummaryEmpty(mes.label);
+  } else {
+    var tG=0,oG=0,verdes=0,crit=0;
+    ZONES.forEach(function(z){
+      var sc=saved[z.id]||[];
+      var tot=z.items.reduce(function(a,i){return a+(i.max||0);},0);
+      var obt=sc.reduce(function(a,s){return a+(s>0?s:0);},0);
+      var pct=tot>0?Math.round(obt/tot*100):0;
+      tG+=tot;oG+=obt;if(pct>=80)verdes++;if(pct<50)crit++;
+    });
+    var pctG=Math.round(oG/tG*100);
+    var stCls=pctG>=80?'bg':pctG>=60?'ba':'br';
+    estadoEl.innerHTML='<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:.5rem">'+
+      '<span class="badge '+stCls+'" style="font-size:13px;padding:5px 14px">'+pctG+'% global</span>'+
+      '<span style="font-size:12px;color:var(--text2)">'+oG+' / '+tG+' puntos</span>'+
+      (canEditBrandStandard()?'<button class="btn-g btn-sm" onclick="bsEditarMes()" style="margin-left:auto"><i class="ti ti-edit"></i> Editar</button>':'')+
+      '</div>';
+    nuevaBtn.innerHTML='<i class="ti ti-refresh"></i> Reiniciar mes';
+    globalCard.style.display='block';
+    document.getElementById('bs-g-score').textContent=oG+' / '+tG;
+    var pctEl=document.getElementById('bs-g-pct');
+    pctEl.textContent=pctG+'%';
+    pctEl.style.color=pctG>=80?'var(--lime)':pctG>=60?'var(--amber)':'var(--red)';
+    document.getElementById('bs-g-verdes').textContent=verdes+'/'+ZONES.length;
+    document.getElementById('bs-g-criticas').textContent=crit;
+    renderBsSummary(saved);
+  }
+}
+
+function renderBsSummaryEmpty(mesLabel){
+  var badge=document.getElementById('bs-total-badge');
+  if(badge){badge.textContent='Sin datos';badge.className='badge bb';}
+  document.getElementById('bs-summary').innerHTML=ZONES.map(function(z){
+    return '<div class="summary-row"><span style="font-size:13px;font-weight:500;color:var(--text)">'+z.name+'</span>'+
+      '<div style="display:flex;align-items:center;gap:10px">'+
+      '<div style="width:90px;height:6px;background:var(--off);border-radius:3px;border:1.5px dashed var(--border2)"></div>'+
+      '<span class="badge bb" style="min-width:46px;text-align:center">—</span></div></div>';
+  }).join('');
+  document.getElementById('bs-resumen-footer').innerHTML=
+    '<div style="padding-bottom:1.25rem"><button class="btn-p" onclick="bsNuevaAuditoria()">'+
+    '<i class="ti ti-clipboard-list"></i> Comenzar auditoría de '+mesLabel+'</button></div>';
+}
+
+function renderBsSummary(savedData){
+  var tG=0,oG=0;
+  var rows=ZONES.map(function(z){
+    var sc=savedData[z.id]||[];
+    var tot=z.items.reduce(function(a,i){return a+(i.max||0);},0);
+    var obt=sc.reduce(function(a,s){return a+(s>0?s:0);},0);
+    var pct=tot>0?Math.round(obt/tot*100):0;
+    tG+=tot;oG+=obt;
+    var col=pct>=80?'var(--green)':pct>=60?'var(--amber)':'var(--red)';
+    var st=pct>=80?'bg':pct>=60?'ba':'br';
+    var fails=sc.filter(function(s){return s===0;}).length;
+    return '<div class="summary-row" style="cursor:pointer" onclick="bsEditZone(\''+z.id+'\')">'+
+      '<span style="font-size:13px;font-weight:500;color:var(--text)">'+z.name+
+      (fails>0?' <span style="font-size:10px;color:var(--red);font-weight:700">&nbsp;·&nbsp;'+fails+' fallo'+(fails>1?'s':'')+'</span>':'')+
+      '</span><div style="display:flex;align-items:center;gap:8px">'+
+      '<div style="width:80px;height:6px;background:var(--off);border-radius:3px">'+
+      '<div style="width:'+pct+'%;height:100%;background:'+col+';border-radius:3px"></div></div>'+
+      '<span class="badge '+st+'" style="min-width:46px;text-align:center">'+pct+'%</span>'+
+      '<i class="ti ti-chevron-right" style="font-size:13px;color:var(--text3)"></i></div></div>';
+  });
+  var pctG=Math.round(oG/tG*100);
+  var badge=document.getElementById('bs-total-badge');
+  if(badge){badge.textContent=pctG+'% global';badge.className='badge '+(pctG>=80?'bg':pctG>=60?'ba':'br');}
+  document.getElementById('bs-summary').innerHTML=rows.join('');
+  document.getElementById('bs-resumen-footer').innerHTML=
+    canEditBrandStandard()?'<div style="padding-bottom:1.25rem"><button class="btn-g" onclick="bsEditarMes()"><i class="ti ti-edit"></i> Editar auditoría completa</button></div>':'';
+}
+
+function bsNuevaAuditoria(){
+  auditState={};auditComments={};
+  ZONES.forEach(function(z){auditState[z.id]=z.items.map(function(){return -1;});});
+  document.getElementById('bs-audit-panel').style.display='block';
+  document.getElementById('bs-resumen-mes').style.display='none';
+  document.getElementById('zone-sel').value='ext';
+  loadAudit('ext');
+}
+
+function bsEditarMes(){
+  var mes=getBsMes();
+  var saved=BS_HISTORICO[mes.key];
+  auditState={};auditComments={};
+  ZONES.forEach(function(z){
+    auditState[z.id]=(saved&&saved[z.id])?saved[z.id].slice():z.items.map(function(){return -1;});
+  });
+  var sc=BS_HISTORICO[mes.key+'_comments']||{};
+  Object.keys(sc).forEach(function(k){auditComments[k]=Object.assign({},sc[k]);});
+  document.getElementById('bs-audit-panel').style.display='block';
+  document.getElementById('bs-resumen-mes').style.display='none';
+  loadAudit(document.getElementById('zone-sel').value);
+}
+
+function bsEditZone(zid){bsEditarMes();document.getElementById('zone-sel').value=zid;loadAudit(zid);}
+function bsVolverResumen(){
+  document.getElementById('bs-audit-panel').style.display='none';
+  document.getElementById('bs-resumen-mes').style.display='block';
+  bsRenderMes();
+}
+
+function loadAudit(zid){
+  var z=ZONES.filter(function(x){return x.id===zid;})[0];
+  if(!z) return;
+  if(!auditState[zid]) auditState[zid]=z.items.map(function(){return -1;});
+  var sc=auditState[zid];
+  var total=z.items.reduce(function(a,i){return a+(i.max||0);},0);
+  var obt=sc.reduce(function(a,s){return a+(s>0?s:0);},0);
+  var answered=sc.filter(function(s){return s>=0;}).length;
+  var pending=sc.filter(function(s){return s<0;}).length;
+  var pct=answered>0?Math.round(obt/total*100):null;
+  var bonus=pct!==null?(pct>=90?200:pct>=70?150:pct>=60?75:0):null;
+  document.getElementById('bs-score').textContent=answered>0?obt+' / '+total:'— / '+total;
+  document.getElementById('bs-pct').textContent=pct!==null?pct+'%':'—';
+  document.getElementById('bs-bonus').textContent=bonus!==null?(bonus>0?'+'+bonus+'€':'Sin bonus'):'—';
+  var prog=document.getElementById('bs-progress');
+  if(pending>0){prog.style.background='var(--amber-lt)';prog.style.color='var(--amber-dk)';prog.innerHTML='<i class="ti ti-clock"></i> '+pending+' ítems sin evaluar';}
+  else{prog.style.background='var(--green-lt)';prog.style.color='var(--green)';prog.innerHTML='<i class="ti ti-circle-check"></i> Zona completada';}
+  if(!auditComments[zid]) auditComments[zid]={};
+  var saveBtn=document.getElementById('bs-save-btn');
+  if(saveBtn) saveBtn.style.display=canEditBrandStandard()?'inline-flex':'none';
+  var notice=document.getElementById('bs-readonly-notice');
+  if(notice) notice.style.display=canEditBrandStandard()?'none':'block';
+  document.getElementById('bs-items').innerHTML=z.items.map(function(item,ri){
+    var s=sc[ri];
+    var isOk=s===item.max,isFail=s===0,isPend=s<0;
+    var comment=auditComments[zid][ri]||'';
+    return '<div class="audit-item" style="'+(isFail?'background:rgba(226,75,74,0.03)':isPend?'background:rgba(200,214,77,0.04)':'')+'">' +
+      '<div style="flex:1"><div class="audit-text">'+item.t+'</div>'+
+      (item.note?'<div class="audit-note"><i class="ti ti-info-circle" style="font-size:11px"></i> '+item.note+'</div>':'')+
+      (isFail?'<div style="margin-top:6px;display:flex;align-items:center;gap:6px">'+
+        '<i class="ti ti-message-2" style="font-size:13px;color:var(--red);flex-shrink:0"></i>'+
+        '<input type="text" placeholder="¿Por qué no se supera?" value="'+comment.replace(/"/g,'&quot;')+'" '+
+        'data-zone="'+zid+'" data-idx="'+ri+'" oninput="setComment(this)" '+
+        'style="flex:1;font-size:12px;padding:5px 9px;border:1.5px solid var(--red);border-radius:6px;background:var(--red-lt);color:var(--text);font-family:Barlow,sans-serif;outline:none"></div>':'')+
+      '</div>'+
+      '<div class="pts-group">'+
+      '<button class="pts-btn'+(isOk?' ok':'')+'" onclick="setAudit(\''+zid+'\','+ri+','+item.max+')"><i class="ti ti-check"></i></button>'+
+      '<span class="pts-val" style="color:'+(isPend?'var(--lime)':'var(--text2)')+';font-weight:'+(isPend?'700':'400')+'">'+(isPend?'?':s+'/'+item.max)+'</span>'+
+      '<button class="pts-btn'+(isFail?' fail':'')+'" onclick="setAudit(\''+zid+'\','+ri+',0)"><i class="ti ti-x"></i></button>'+
+      '</div></div>';
+  }).join('');
+}
+
+function setAudit(zid,idx,val){
+  if(!auditState[zid]) auditState[zid]=ZONES.filter(function(z){return z.id===zid;})[0].items.map(function(){return -1;});
+  auditState[zid][idx]=auditState[zid][idx]===val?-1:val;
+  if(auditState[zid][idx]>0&&auditComments[zid]) delete auditComments[zid][idx];
+  loadAudit(zid);
+}
+function setComment(input){
+  var zid=input.getAttribute('data-zone'),idx=parseInt(input.getAttribute('data-idx'));
+  if(!auditComments[zid]) auditComments[zid]={};
+  var saveBtn=document.getElementById('bs-save-btn');
+  if(saveBtn) saveBtn.style.display=canEditBrandStandard()?'inline-flex':'none';
+  var notice=document.getElementById('bs-readonly-notice');
+  if(notice) notice.style.display=canEditBrandStandard()?'none':'block';
+  auditComments[zid][idx]=input.value;
+}
+function saveAudit(){
+  var zid=document.getElementById('zone-sel').value;
+  var z=ZONES.filter(function(x){return x.id===zid;})[0];
+  var sc=auditState[zid];
+  var total=z.items.reduce(function(a,i){return a+(i.max||0);},0);
+  var obt=sc.reduce(function(a,s){return a+(s>0?s:0);},0);
+  var pct=Math.round(obt/total*100);
+  var pending=sc.filter(function(s){return s<0;}).length;
+  var mes=getBsMes();
+  if(!BS_HISTORICO[mes.key]) BS_HISTORICO[mes.key]={};
+  BS_HISTORICO[mes.key][zid]=sc.slice();
+  if(!BS_HISTORICO[mes.key+'_comments']) BS_HISTORICO[mes.key+'_comments']={};
+  BS_HISTORICO[mes.key+'_comments'][zid]=Object.assign({},auditComments[zid]||{});
+  var em=pct>=80?'Nivel óptimo':pct>=60?'Atención':'CRÍTICO';
+  logAction('Brand Standard guardado',z.name+' — '+mes.label+' — '+pct+'%');
+  syncAuditoria(zid, mes);
+  syncLog('Brand Standard', z.name+' — '+mes.label+' — '+pct+'%');
+  alert('Zona guardada: '+z.name+'\n'+obt+'/'+total+' pts · '+pct+'% · '+em+(pending>0?'\n'+pending+' ítems sin evaluar':''));
+}
+
+// ═══ INCIDENCIAS ═══
+var INCS = [
+  {id:1,zona:'Vestuario Piscina Hombres',desc:'Grifo central masculino sin agua caliente',prio:'red',resp:'Orestes',fecha:'2026-04-08',cierre:null,estado:'Abierta',horas:3,coste:0,tipo:'Correctivo',nota:'Registrado en brand standard abril'},
+  {id:2,zona:'Vestuario Piscina Hombres',desc:'Techo de ventilación abierto sin cerrar',prio:'red',resp:'Jose',fecha:'2026-04-06',cierre:null,estado:'Abierta',horas:2,coste:0,tipo:'Correctivo',nota:''},
+  {id:3,zona:'Spinning',desc:'Displays de varias bicicletas no funcionan',prio:'amber',resp:'Empresa externa',fecha:'2026-04-01',cierre:null,estado:'En gestión',horas:0,coste:300,tipo:'Externo',nota:'Parte tramitado al proveedor'},
+  {id:4,zona:'Piscina y Spa',desc:'Silla minusválidos con óxido — cambiar gomas',prio:'amber',resp:'Manuel',fecha:'2026-03-28',cierre:null,estado:'En gestión',horas:2,coste:80,tipo:'Correctivo',nota:''},
+  {id:5,zona:'Jardinería y Otros',desc:'Ludoteca: suelo, paredes y pintura en estado crítico',prio:'red',resp:'Orestes',fecha:'2026-03-16',cierre:null,estado:'Abierta',horas:20,coste:800,tipo:'Correctivo',nota:'Requiere presupuesto externo'},
+  {id:6,zona:'Crossfit',desc:'Kettlebells y rack sin pintar — imagen degradada',prio:'green',resp:'Manuel',fecha:'2026-03-16',cierre:null,estado:'Abierta',horas:4,coste:0,tipo:'Preventivo',nota:''},
+  {id:7,zona:'Piscina y Spa',desc:'Depuradora SPA — revisión completa',prio:'amber',resp:'Empresa externa',fecha:'2026-01-01',cierre:'2026-01-20',estado:'Cerrada',horas:14,coste:0,tipo:'Externo',nota:'Terminado'}
+];
+var nextIncId=8;
+var currentFilter='todas';
+var TODAY=new Date('2026-05-10');
+function daysSince(d){return Math.round((TODAY-new Date(d))/86400000);}
+
+function updateIncKpis(){
+  var open=INCS.filter(function(i){return i.estado==='Abierta';}).length;
+  var prog=INCS.filter(function(i){return i.estado==='En gestión';}).length;
+  var done=INCS.filter(function(i){return i.estado==='Cerrada';}).length;
+  var cost=INCS.filter(function(i){return i.estado!=='Cerrada';}).reduce(function(a,i){return a+(i.coste||0);},0);
+  var urg=INCS.filter(function(i){return i.prio==='red'&&i.estado!=='Cerrada';}).length;
+  function se(id,v){var e=document.getElementById(id);if(e)e.textContent=v;}
+  se('i-open',open);se('i-prog',prog);se('i-done',done);
+  se('i-cost',cost>0?cost+'€':'0€');se('nav-badge',open+prog);
+  se('kpi-inc-open',open);se('kpi-inc-urg',urg+' urgentes');
+}
+
+function setFilter(f,btn){
+  currentFilter=f;
+  document.querySelectorAll('#page-incidencias .filter-btn').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  renderIncs();
+}
+
+function renderIncs(){
+  updateIncKpis();
+  var list=currentFilter==='todas'?INCS:currentFilter==='red'?INCS.filter(function(i){return i.prio==='red';}):
+    currentFilter==='amber'?INCS.filter(function(i){return i.prio==='amber';}):
+    INCS.filter(function(i){return i.estado===currentFilter;});
+  var el=document.getElementById('inc-list');
+  if(!list.length){el.innerHTML='<div class="empty"><i class="ti ti-mood-happy"></i><div>Sin incidencias para este filtro</div></div>';return;}
+  el.innerHTML=list.map(function(inc){
+    var pc=inc.prio==='red'?'var(--red)':inc.prio==='amber'?'var(--amber)':'var(--green)';
+    var sb=inc.estado==='Abierta'?'br':inc.estado==='En gestión'?'ba':'bg';
+    var dias=daysSince(inc.fecha);
+    var alerta=inc.estado!=='Cerrada'&&dias>14;
+    return '<div class="inc-card'+(alerta?' urgent':'')+'">'+
+      '<div class="inc-header"><div class="prio-stripe" style="background:'+pc+'"></div>'+
+      '<div style="flex:1"><div class="inc-title">'+inc.desc+'</div>'+
+      '<div class="inc-meta">'+
+      '<span class="meta-item"><i class="ti ti-map-pin"></i>'+inc.zona+'</span>'+
+      '<span class="meta-item"><i class="ti ti-user"></i>'+inc.resp+'</span>'+
+      '<span class="meta-item"><i class="ti ti-calendar"></i>'+inc.fecha.slice(5).replace('-','/')+'</span>'+
+      (inc.estado!=='Cerrada'?'<span class="meta-item'+(alerta?' dias-warn':'')+'"><i class="ti ti-clock"></i>'+dias+'d</span>':'')+
+      '</div></div><span class="badge '+sb+'">'+inc.estado+'</span></div>'+
+      '<div class="inc-body">'+
+      '<div class="detail-grid">'+
+      '<div class="detail-field"><div class="detail-lbl">Tipo</div><div class="detail-val">'+inc.tipo+'</div></div>'+
+      '<div class="detail-field"><div class="detail-lbl">Responsable</div><div class="detail-val">'+inc.resp+'</div></div>'+
+      '<div class="detail-field"><div class="detail-lbl">Horas</div><div class="detail-val">'+(inc.horas>0?inc.horas+'h':'—')+'</div></div>'+
+      '<div class="detail-field"><div class="detail-lbl">Coste</div><div class="detail-val">'+(inc.coste>0?inc.coste+'€':'—')+'</div></div>'+
+      '</div>'+
+      (inc.nota?'<div style="font-size:12px;color:var(--sky2);font-style:italic;margin-bottom:10px;padding:6px 10px;background:var(--sky-lt);border-radius:var(--rsm)">'+inc.nota+'</div>':'')+
+      '<div class="inc-actions">'+
+      (inc.estado==='Abierta'?'<button class="btn-g btn-sm" onclick="changeEstado('+inc.id+',\'En gestión\')"><i class="ti ti-player-play"></i> En gestión</button>':'')+
+      (inc.estado!=='Cerrada'?'<button class="btn-g btn-sm" onclick="changeEstado('+inc.id+',\'Cerrada\')"><i class="ti ti-check"></i> Cerrar</button>':'')+
+      (isAdmin()?'<button class="btn-danger" onclick="deleteInc('+inc.id+')"><i class="ti ti-trash"></i></button>':'')+
+      '</div></div></div>';
+  }).join('');
+}
+
+function changeEstado(id,estado){
+  var inc=INCS.filter(function(i){return i.id===id;})[0];
+  if(!inc) return;
+  inc.estado=estado;
+  if(estado==='Cerrada') inc.cierre=TODAY.toISOString().slice(0,10);
+  logAction('Incidencia '+estado,inc.desc);
+  syncIncidencia(inc);
+  syncLog('Incidencia '+estado, inc.desc);
+  renderIncs();renderUrgentes();
+}
+function deleteInc(id){
+  if(!confirm('¿Eliminar esta incidencia?')) return;
+  INCS=INCS.filter(function(i){return i.id!==id;});
+  renderIncs();renderUrgentes();
+}
+function addInc(){
+  var desc=document.getElementById('f-desc').value.trim();
+  if(!desc){alert('Añade una descripción');return;}
+  INCS.unshift({
+    id:nextIncId++,zona:document.getElementById('f-zona').value,desc:desc,
+    prio:document.getElementById('f-prio').value,resp:document.getElementById('f-resp').value,
+    fecha:TODAY.toISOString().slice(0,10),cierre:null,estado:'Abierta',
+    horas:parseFloat(document.getElementById('f-horas').value)||0,
+    coste:parseFloat(document.getElementById('f-coste').value)||0,
+    tipo:document.getElementById('f-tipo').value,nota:document.getElementById('f-nota').value
+  });
+  ['f-desc','f-horas','f-coste','f-nota'].forEach(function(id){document.getElementById(id).value='';});
+  logAction('Incidencia registrada',desc);
+  var newInc = INCS[0];
+  syncIncidencia(newInc);
+  syncLog('Incidencia registrada', desc);
+  closeSheet('inc-overlay');
+  renderIncs();renderUrgentes();
+}
+
+// ═══ TAREAS ═══
+var MESES_ES=['ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE'];
+var MESES_LABEL=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+var currentTareasMes=MESES_ES[new Date('2026-05-10').getMonth()];
+var TAREAS_DATA={
+  ENERO:[
+    {zona:'PISCINA',desc:'Depuradora SPA — revisión externa',horas:14,coste:0,resp:'Empresa externa',comment:'Terminado',estado:'Terminado',prio:'urgente'},
+    {zona:'PISCINA',desc:'Fuga tubería sauna',horas:8,coste:0,resp:'Jose',comment:'',estado:'Pendiente',prio:'urgente'},
+    {zona:'PISCINA',desc:'Focos piscina',horas:6,coste:0,resp:'Jose',comment:'',estado:'Pendiente',prio:'normal'},
+    {zona:'FITNESS',desc:'Antena cardio',horas:8,coste:0,resp:'Jose',comment:'',estado:'Pendiente',prio:'urgente'},
+    {zona:'FITNESS',desc:'Tapicería múltiple (remo, abdominal, femoral...)',horas:0,coste:0,resp:'Orestes',comment:'Lista pendiente',estado:'Pendiente',prio:'normal'},
+    {zona:'COLECTIVAS',desc:'Sala pilates — reforma',horas:20,coste:220,resp:'Empresa externa',comment:'EXTERNO',estado:'Pendiente',prio:'normal'},
+    {zona:'VESTUARIOS',desc:'Trampilla WC mojado hombres',horas:7,coste:0,resp:'Jose',comment:'',estado:'Pendiente',prio:'urgente'},
+    {zona:'VESTUARIOS',desc:'Canaleta WC sellado',horas:4,coste:0,resp:'Orestes',comment:'',estado:'Pendiente',prio:'normal'},
+    {zona:'OTROS',desc:'Humedades interiores',horas:15,coste:0,resp:'Jose',comment:'17h reales mes anterior',estado:'En curso',prio:'urgente'},
+    {zona:'OTROS',desc:'Circuito cámaras',horas:0,coste:960,resp:'Empresa externa',comment:'EXTERNO',estado:'Pendiente',prio:'normal'},
+    {zona:'OTROS',desc:'Foco parking',horas:4,coste:0,resp:'Manuel',comment:'',estado:'Pendiente',prio:'normal'}
+  ],
+  ABRIL:[
+    {zona:'URGENCIAS',desc:'Desbroce malas hierbas pasillo pádel',horas:0,coste:0,resp:'Jose',comment:'URGENTE',estado:'Pendiente',prio:'urgente'},
+    {zona:'URGENCIAS',desc:'Losas vestuario hombres piscina',horas:0,coste:0,resp:'Jose',comment:'URGENTE',estado:'Pendiente',prio:'urgente'},
+    {zona:'URGENCIAS',desc:'Reparar bicis ciclo — 25 operativas',horas:0,coste:0,resp:'Jose',comment:'URGENTE',estado:'Pendiente',prio:'urgente'},
+    {zona:'URGENCIAS',desc:'Humedades interiores',horas:0,coste:0,resp:'Jose',comment:'URGENTE',estado:'Pendiente',prio:'urgente'},
+    {zona:'URGENCIAS',desc:'Pintura muro pádel',horas:0,coste:0,resp:'Empresa externa',comment:'EXTERNO URGENTE',estado:'Pendiente',prio:'urgente'},
+    {zona:'URGENCIAS',desc:'Césped',horas:0,coste:0,resp:'Manuel',comment:'URGENTE',estado:'Pendiente',prio:'urgente'},
+    {zona:'PISCINA',desc:'Silla minusválidos piscina',horas:2,coste:0,resp:'Manuel',comment:'',estado:'Pendiente',prio:'normal'},
+    {zona:'PISCINA',desc:'Extractor pasillo piscina',horas:20,coste:0,resp:'Jose',comment:'',estado:'Pendiente',prio:'normal'},
+    {zona:'FITNESS',desc:'Antena cardio',horas:8,coste:0,resp:'Jose',comment:'',estado:'Pendiente',prio:'urgente'},
+    {zona:'FITNESS',desc:'Pintura y humedades sala fitness',horas:30,coste:0,resp:'Jose',comment:'',estado:'Pendiente',prio:'urgente'},
+    {zona:'COLECTIVAS',desc:'Sala pilates — terminar',horas:0,coste:220,resp:'Manuel',comment:'',estado:'En curso',prio:'urgente'},
+    {zona:'COLECTIVAS',desc:'Espejo roto sala ciclo',horas:0,coste:560,resp:'Empresa externa',comment:'560€+IVA',estado:'Pendiente',prio:'normal'},
+    {zona:'VESTUARIOS',desc:'Losas vestuario hombres piscina',horas:6,coste:0,resp:'Jose',comment:'',estado:'Pendiente',prio:'urgente'},
+    {zona:'VESTUARIOS',desc:'Pintura techos vestuarios',horas:10,coste:0,resp:'Orestes',comment:'',estado:'Pendiente',prio:'urgente'},
+    {zona:'OTROS',desc:'Motor pozo',horas:0,coste:0,resp:'Jose',comment:'3h estimadas',estado:'Pendiente',prio:'urgente'},
+    {zona:'OTROS',desc:'Poda de setos',horas:0,coste:0,resp:'Orestes',comment:'',estado:'Pendiente',prio:'normal'}
+  ],
+  FEBRERO:[],MARZO:[],MAYO:[],JUNIO:[],JULIO:[],AGOSTO:[],SEPTIEMBRE:[],OCTUBRE:[],NOVIEMBRE:[],DICIEMBRE:[]
+};
+
+function buildMesesFilter(){
+  var wrap=document.getElementById('meses-filter');
+  if(!wrap) return;
+  wrap.innerHTML='';
+  MESES_ES.forEach(function(mes,i){
+    var hasData=TAREAS_DATA[mes]&&TAREAS_DATA[mes].length>0;
+    var btn=document.createElement('button');
+    btn.className='filter-btn'+(mes===currentTareasMes?' active':'');
+    btn.textContent=MESES_LABEL[i];
+    btn.style.opacity=(!hasData&&mes!==currentTareasMes)?'0.45':'1';
+    btn.addEventListener('click',function(){
+      currentTareasMes=mes;
+      document.querySelectorAll('#meses-filter .filter-btn').forEach(function(b){b.classList.remove('active');});
+      btn.classList.add('active');
+      renderTareas();
+    });
+    wrap.appendChild(btn);
+  });
+}
+
+function renderTareas(){
+  buildMesesFilter();
+  var zona=document.getElementById('t-zona-sel').value;
+
+  // Acumular tareas pendientes de meses anteriores
+  var mesActualIdx = MESES_ES.indexOf(currentTareasMes);
+  var pendientesAnteriores = [];
+  for(var mi=0; mi<mesActualIdx; mi++){
+    var mesPasado = MESES_ES[mi];
+    var mesPasadoLabel = MESES_LABEL[mi];
+    var tareasPasadas = TAREAS_DATA[mesPasado]||[];
+    tareasPasadas.forEach(function(t){
+      if(t.estado !== 'Terminado'){
+        var tCopia = Object.assign({}, t);
+        tCopia.comment = (tCopia.comment?tCopia.comment+' · ':'') + 'Pendiente de '+mesPasadoLabel;
+        tCopia._arrastrada = true;
+        pendientesAnteriores.push(tCopia);
+      }
+    });
+  }
+
+  var data=(TAREAS_DATA[currentTareasMes]||[]).slice();
+  // Añadir pendientes de meses anteriores al principio
+  if(pendientesAnteriores.length > 0){
+    data = pendientesAnteriores.concat(data);
+  }
+  if(zona!=='TODAS') data=data.filter(function(t){return t.zona===zona;});
+  var horas=data.reduce(function(a,t){return a+(t.horas||0);},0);
+  var urg=data.filter(function(t){return t.prio==='urgente'&&t.estado!=='Terminado';}).length;
+  var coste=data.reduce(function(a,t){return a+(t.coste||0);},0);
+  var narrastradas=pendientesAnteriores.length;
+  function se(id,v){var e=document.getElementById(id);if(e)e.textContent=v;}
+  se('t-total',data.length);se('t-horas',horas+'h');se('t-urg',urg);se('t-coste',coste>0?coste+'€':'—');
+  // Show arrastradas alert if any
+  var alertEl=document.getElementById('t-arrastradas-alert');
+  if(alertEl){
+    if(narrastradas>0){
+      alertEl.style.display='block';
+      alertEl.innerHTML='<strong>'+narrastradas+' tarea'+(narrastradas>1?'s':'')+' arrastrada'+(narrastradas>1?'s':'')+' de meses anteriores</strong> — pendientes sin completar que se acumulan en este mes.';
+    } else {
+      alertEl.style.display='none';
+    }
+  }
+  var e=document.getElementById('nav-badge-tareas');if(e)e.textContent=urg;
+  var mesLabel=MESES_LABEL[MESES_ES.indexOf(currentTareasMes)]||currentTareasMes;
+  if(!data.length){
+    document.getElementById('tareas-list').innerHTML='<div class="empty"><i class="ti ti-calendar-plus"></i>'+
+      '<div style="font-family:\'Barlow Condensed\',sans-serif;font-size:18px;font-weight:700;color:var(--navy);margin-bottom:6px">'+mesLabel+' — sin tareas</div>'+
+      '<div>Añade la primera tarea con el botón de abajo.</div></div>';
+    return;
+  }
+  var groups={};
+  var order=['URGENCIAS','PISCINA','FITNESS','COLECTIVAS','VESTUARIOS','OTROS'];
+  data.forEach(function(t){if(!groups[t.zona])groups[t.zona]=[];groups[t.zona].push(t);});
+  var labels={URGENCIAS:'Urgencias',PISCINA:'Piscina y Spa',FITNESS:'Sala Fitness',COLECTIVAS:'Clases Colectivas',VESTUARIOS:'Vestuarios',OTROS:'Otros / Exterior'};
+  var keys=zona!=='TODAS'?Object.keys(groups):order.filter(function(z){return groups[z];});
+  document.getElementById('tareas-list').innerHTML=keys.map(function(z){
+    var items=groups[z];
+    return '<div class="card" style="margin-bottom:.75rem">'+
+      '<div class="card-header"><span class="card-title">'+(z==='URGENCIAS'?'🔴 ':'')+labels[z]+'</span>'+
+      '<span class="badge '+(z==='URGENCIAS'?'br':'bb')+'">'+items.length+' tarea'+(items.length!==1?'s':'')+'</span></div>'+
+      items.map(function(t,i){
+        var pc=t.prio==='urgente'?'var(--red)':t.prio==='normal'?'var(--amber)':'var(--green)';
+        var sb=t.estado==='Terminado'?'bg':t.estado==='En curso'?'ba':'bb';
+        return '<div style="display:flex;align-items:flex-start;gap:10px;padding:.625rem 1.25rem;border-bottom:'+(i===items.length-1?'none':'1px solid var(--border)')+'">'+
+          '<div style="width:4px;min-height:36px;background:'+pc+';border-radius:2px;flex-shrink:0;margin-top:2px"></div>'+
+          '<div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:'+(t.prio==='urgente'?'600':'500')+';color:var(--text);'+(t.estado==='Terminado'?'text-decoration:line-through;opacity:.5':'')+'">'+ t.desc+'</div>'+
+          '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px">'+
+          '<span style="font-size:11px;color:var(--text2)"><i class="ti ti-user" style="font-size:12px"></i> '+t.resp+'</span>'+
+          (t.horas>0?'<span style="font-size:11px;color:var(--text2)"><i class="ti ti-clock" style="font-size:12px"></i> '+t.horas+'h</span>':'')+
+          (t.coste>0?'<span style="font-size:11px;color:var(--sky)">'+t.coste+'€</span>':'')+
+          (t.comment?'<span style="font-size:11px;color:var(--text3);font-style:italic">'+t.comment+'</span>':'')+
+          '</div>'+
+          '<div style="display:flex;gap:6px;margin-top:6px">'+
+          (t.estado==='Pendiente'?'<button class="btn-g btn-sm" style="font-size:11px;padding:3px 9px" onclick="cambiarEstadoTarea('+i+',\'En curso\')"><i class="ti ti-player-play"></i> En curso</button>':'')+
+          (t.estado!=='Terminado'?'<button class="btn-g btn-sm" style="font-size:11px;padding:3px 9px;border-color:var(--green);color:var(--green)" onclick="cambiarEstadoTarea('+i+',\'Terminado\')"><i class="ti ti-check"></i> Terminado</button>':'')+
+          (t.estado==='Terminado'?'<button class="btn-g btn-sm" style="font-size:11px;padding:3px 9px" onclick="cambiarEstadoTarea('+i+',\'Pendiente\')"><i class="ti ti-refresh"></i> Reabrir</button>':'')+
+          '</div>'+
+          '</div><span class="badge '+sb+'" style="flex-shrink:0;align-self:flex-start">'+t.estado+'</span></div>';
+      }).join('')+'</div>';
+  }).join('');
+}
+
+function addTarea(){
+  var desc=document.getElementById('tf-desc').value.trim();
+  if(!desc){alert('Añade una descripción');return;}
+  if(!TAREAS_DATA[currentTareasMes]) TAREAS_DATA[currentTareasMes]=[];
+  TAREAS_DATA[currentTareasMes].unshift({
+    zona:document.getElementById('tf-zona').value,desc:desc,
+    prio:document.getElementById('tf-prio').value,resp:document.getElementById('tf-resp').value,
+    horas:parseFloat(document.getElementById('tf-horas').value)||0,
+    coste:parseFloat(document.getElementById('tf-coste').value)||0,
+    comment:document.getElementById('tf-comment').value,estado:'Pendiente'
+  });
+  ['tf-desc','tf-horas','tf-coste','tf-comment'].forEach(function(id){document.getElementById(id).value='';});
+  logAction('Tarea registrada',desc);
+  syncTarea(TAREAS_DATA[currentTareasMes][0]);
+  syncLog('Tarea registrada', desc);
+  closeSheet('tarea-overlay');
+  renderTareas();
+}
+
+// ═══ DIARIO ═══
+var DIARIO=[
+  {id:1,quien:'Jose',fecha:'2026-05-05',tareas:[{desc:'Preventivo piscina — pH y cloro',horas:2,estado:'Terminado'},{desc:'Reparación grifo vestuario masculino piscina',horas:1.5,estado:'Terminado'}],incidencias:'Losa suelta en playa piscina',notas:'Técnico BH pendiente',horas_total:3.5},
+  {id:2,quien:'Manuel',fecha:'2026-05-05',tareas:[{desc:'Preventivo clases colectivas',horas:3,estado:'Terminado'},{desc:'Pintar kettlebells — avance',horas:1.5,estado:'En curso'}],incidencias:'',notas:'Falta pintura roja',horas_total:4.5},
+  {id:3,quien:'Jose',fecha:'2026-05-06',tareas:[{desc:'Losas vestuario hombres piscina — inicio',horas:3,estado:'En curso'},{desc:'Preventivo WC',horas:2.5,estado:'Terminado'}],incidencias:'Taquilla 14 seco hombres sin cerradura',notas:'',horas_total:5.5},
+  {id:4,quien:'Manuel',fecha:'2026-05-06',tareas:[{desc:'Filtros AACC sala grande y mediana',horas:2,estado:'Terminado'},{desc:'Pintar rack crossfit',horas:2.5,estado:'En curso'}],incidencias:'',notas:'Rack necesita segunda mano',horas_total:4.5},
+  {id:5,quien:'Jose',fecha:'2026-05-07',tareas:[{desc:'Losas vestuario hombres — continuación',horas:3.5,estado:'En curso'},{desc:'Preventivo piscina',horas:2,estado:'Terminado'}],incidencias:'',notas:'',horas_total:5.5},
+  {id:6,quien:'Manuel',fecha:'2026-05-07',tareas:[{desc:'Segunda mano rack crossfit',horas:2,estado:'Terminado'},{desc:'Diagnóstico bicicletas ciclo',horas:2,estado:'Pendiente'}],incidencias:'Bici 8 y 16 requieren piezas externas',notas:'Contactar proveedor displays',horas_total:4},
+  {id:7,quien:'Jose',fecha:'2026-05-08',tareas:[{desc:'Corte césped zona piscina',horas:3,estado:'Terminado'},{desc:'Desbroce malas hierbas pádel',horas:2,estado:'Terminado'}],incidencias:'',notas:'',horas_total:5},
+  {id:8,quien:'Manuel',fecha:'2026-05-08',tareas:[{desc:'Kettlebells pintadas — terminado',horas:2,estado:'Terminado'},{desc:'Compras material almacén',horas:1,estado:'Terminado'}],incidencias:'',notas:'Kettlebells listas',horas_total:3}
+];
+var nextDiarioId=9;
+var weekOffset=0;
+var diarioView='semana';
+var djTareas=[];
+
+function getWeekDays(off){
+  var base=new Date('2026-05-10');
+  var day=base.getDay();
+  var monday=new Date(base);
+  monday.setDate(base.getDate()-(day===0?6:day-1)+off*7);
+  var days=[];
+  for(var i=0;i<5;i++){var d=new Date(monday);d.setDate(monday.getDate()+i);days.push(d);}
+  return days;
+}
+function fmtDate(d){return d.toISOString().slice(0,10);}
+function fmtHuman(d){
+  var dn=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+  var mn=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  return dn[d.getDay()]+' '+d.getDate()+' '+mn[d.getMonth()];
+}
+function prevWeek(){weekOffset--;renderDiario();}
+function nextWeek(){weekOffset++;renderDiario();}
+function setDiarioView(v,btn){
+  diarioView=v;
+  document.querySelectorAll('#page-diario .filter-btn').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  renderDiario();
+}
+
+function renderDiario(){
+  var days=getWeekDays(weekOffset);
+  var dateStrs=days.map(fmtDate);
+  var label=fmtHuman(days[0]).replace(/\w+\s/,'')+' – '+fmtHuman(days[4])+' '+days[0].getFullYear();
+  document.getElementById('week-label').textContent='Semana del '+label;
+  var weekEntries=DIARIO.filter(function(e){return dateStrs.indexOf(e.fecha)>-1;});
+  var joseH=weekEntries.filter(function(e){return e.quien==='Jose';}).reduce(function(a,e){return a+(e.horas_total||0);},0);
+  var manuelH=weekEntries.filter(function(e){return e.quien==='Manuel';}).reduce(function(a,e){return a+(e.horas_total||0);},0);
+  var doneC=weekEntries.reduce(function(a,e){return a+e.tareas.filter(function(t){return t.estado==='Terminado';}).length;},0);
+  var incC=weekEntries.filter(function(e){return e.incidencias&&e.incidencias.trim();}).length;
+  function se(id,v){var e=document.getElementById(id);if(e)e.textContent=v;}
+  se('d-done',doneC);se('d-inc',incC);
+  var jH=document.getElementById('d-jose-h');
+  if(jH){jH.textContent=joseH+'h';jH.style.color=joseH>=30?'var(--lime)':joseH>=20?'var(--amber)':'var(--red)';}
+  se('d-jose-pct','de 35h · '+Math.round(joseH/35*100)+'%');
+  var mH=document.getElementById('d-manuel-h');
+  if(mH){mH.textContent=manuelH+'h';mH.style.color=manuelH>=30?'var(--lime)':manuelH>=20?'var(--amber)':'var(--red)';}
+  se('d-manuel-pct','de 35h · '+Math.round(manuelH/35*100)+'%');
+  var workers=diarioView==='jose'?['Jose']:diarioView==='manuel'?['Manuel']:['Jose','Manuel'];
+  var avColors={Jose:{bg:'#185FA5'},Manuel:{bg:'#818F18'}};
+  var html='';
+  days.forEach(function(day){
+    var ds=fmtDate(day);
+    var isToday=ds==='2026-05-10';
+    var dayEntries=weekEntries.filter(function(e){return e.fecha===ds;});
+    var totalH=dayEntries.reduce(function(a,e){return a+(e.horas_total||0);},0);
+    html+='<div class="day-col'+(isToday?' today':'')+'">'+
+      '<div class="day-header"><span class="day-name">'+fmtHuman(day)+'</span>'+
+      (isToday?'<span style="background:var(--lime);color:var(--navy3);font-size:10px;padding:2px 8px;border-radius:8px;font-weight:700">Hoy</span>':'')+
+      '<span style="font-size:11px;color:rgba(255,255,255,0.5);margin-left:auto">'+(totalH>0?totalH+'h':'Sin registros')+'</span></div>';
+    workers.forEach(function(w){
+      var entry=dayEntries.filter(function(e){return e.quien===w;})[0];
+      var av=avColors[w];
+      html+='<div class="worker-block"><div class="worker-header">'+
+        '<div class="worker-avatar" style="background:'+av.bg+';color:#fff">'+w[0]+'</div>'+
+        '<span class="worker-name">'+w+'</span>'+
+        (entry?'<span class="worker-hours">'+entry.horas_total+'h</span>':'')+
+        '<button class="btn-g btn-sm" style="margin-left:'+(entry?'8px':'auto')+';padding:3px 8px;font-size:11px" onclick="openDiarioFormFor(\''+w+'\',\''+ds+'\')">'+
+        (entry?'<i class="ti ti-edit"></i>':'<i class="ti ti-plus"></i> Registrar')+
+        '</button></div>';
+      if(!entry){
+        html+='<div class="empty-day">Sin actividad registrada</div>';
+      } else {
+        entry.tareas.forEach(function(t){
+          var dc=t.estado==='Terminado'?'#2A8A30':t.estado==='En curso'?'var(--amber)':'var(--text3)';
+          var bc=t.estado==='Terminado'?'bg':t.estado==='En curso'?'ba':'bb';
+          html+='<div class="entry-row"><div class="entry-dot" style="background:'+dc+'"></div>'+
+            '<div style="flex:1"><div class="entry-text">'+t.desc+'</div>'+
+            '<div class="entry-meta">'+t.horas+'h · <span class="entry-badge '+bc+'">'+t.estado+'</span></div></div></div>';
+        });
+        if(entry.incidencias) html+='<div><span class="inc-tag"><i class="ti ti-alert-triangle" style="font-size:11px"></i> '+entry.incidencias+'</span></div>';
+        if(entry.notas) html+='<div><span class="note-tag"><i class="ti ti-message-2" style="font-size:11px"></i> '+entry.notas+'</span></div>';
+      }
+      html+='</div>';
+    });
+    html+='</div>';
+  });
+  document.getElementById('diario-content').innerHTML=html;
+}
+
+function openDiarioForm(){
+  djTareas=[{desc:'',horas:1,estado:'Terminado'}];
+  document.getElementById('dj-fecha').value=fmtDate(TODAY);
+  document.getElementById('dj-quien').value='Jose';
+  document.getElementById('dj-incidencias').value='';
+  document.getElementById('dj-notas').value='';
+  renderDjTareas();
+  openSheet('diario-overlay');
+}
+function openDiarioFormFor(worker,fecha){
+  var existing=DIARIO.filter(function(e){return e.quien===worker&&e.fecha===fecha;})[0];
+  djTareas=existing?existing.tareas.map(function(t){return {desc:t.desc,horas:t.horas,estado:t.estado};}): [{desc:'',horas:1,estado:'Terminado'}];
+  document.getElementById('dj-quien').value=worker;
+  document.getElementById('dj-fecha').value=fecha;
+  document.getElementById('dj-incidencias').value=existing?existing.incidencias:'';
+  document.getElementById('dj-notas').value=existing?existing.notas:'';
+  renderDjTareas();
+  openSheet('diario-overlay');
+}
+function renderDjTareas(){
+  document.getElementById('dj-tareas-list').innerHTML=djTareas.map(function(t,i){
+    return '<div class="dj-row"><div style="flex:1">'+
+      '<input class="form-input" style="margin-bottom:6px" type="text" placeholder="¿Qué se ha hecho?" value="'+t.desc.replace(/"/g,'&quot;')+'" oninput="djTareas['+i+'].desc=this.value">'+
+      '<div style="display:flex;gap:8px">'+
+      '<div style="flex:1"><div style="font-size:10px;color:var(--text2);margin-bottom:2px">Horas reales</div>'+
+      '<input class="form-input" type="number" min="0" step="0.5" value="'+t.horas+'" style="padding:5px 8px" oninput="djTareas['+i+'].horas=parseFloat(this.value)||0"></div>'+
+      '<div style="flex:1"><div style="font-size:10px;color:var(--text2);margin-bottom:2px">Estado</div>'+
+      '<select class="form-select" style="padding:5px 8px" onchange="djTareas['+i+'].estado=this.value">'+
+      '<option'+(t.estado==='Terminado'?' selected':'')+'>Terminado</option>'+
+      '<option'+(t.estado==='En curso'?' selected':'')+'>En curso</option>'+
+      '<option'+(t.estado==='Pendiente'?' selected':'')+'>Pendiente</option>'+
+      '</select></div></div></div>'+
+      '<button class="btn-danger" style="padding:4px 8px" onclick="djTareas.splice('+i+',1);renderDjTareas()"><i class="ti ti-trash"></i></button></div>';
+  }).join('');
+}
+function addDjTarea(){djTareas.push({desc:'',horas:1,estado:'Terminado'});renderDjTareas();}
+function saveDiario(){
+  var quien=document.getElementById('dj-quien').value;
+  var fecha=document.getElementById('dj-fecha').value;
+  if(!fecha){alert('Selecciona una fecha');return;}
+  var valid=djTareas.filter(function(t){return t.desc.trim();});
+  if(!valid.length){alert('Añade al menos una tarea');return;}
+  var ht=parseFloat(valid.reduce(function(a,t){return a+(t.horas||0);},0).toFixed(1));
+  DIARIO=DIARIO.filter(function(e){return !(e.quien===quien&&e.fecha===fecha);});
+  DIARIO.push({id:nextDiarioId++,quien:quien,fecha:fecha,tareas:valid,
+    incidencias:document.getElementById('dj-incidencias').value.trim(),
+    notas:document.getElementById('dj-notas').value.trim(),horas_total:ht});
+  logAction('Jornada registrada',quien+' — '+fecha);
+  var jornadaGuardada = DIARIO.filter(function(e){return e.quien===quien&&e.fecha===fecha;})[0];
+  if(jornadaGuardada){ syncJornada(jornadaGuardada); syncLog('Jornada', quien+' — '+fecha); }
+  closeSheet('diario-overlay');
+  renderDiario();
+}
+
+
+// ═══ GOOGLE SHEETS INTEGRATION ═══
+var SHEETS_URL = 'https://script.google.com/macros/s/AKfycby6isejeoGJOV4ZRdhZ4RkWx7X52HeB3kuZz3yRW10YDdjJsz_wqpQtm7IePkWsEyMD/exec'; // Se rellena tras publicar el Apps Script
+
+function sheetsPost(accion, datos) {
+  if (!SHEETS_URL) return Promise.resolve({ ok: false, error: 'Sin URL configurada' });
+  datos.accion = accion;
+  datos.usuario = currentUser ? currentUser.nombre : 'Desconocido';
+  datos.rol = currentUser ? currentUser.rol : '';
+  // Use no-cors via form submission trick for Google Apps Script
+  return new Promise(function(resolve) {
+    var form = document.createElement('form');
+    form.method = 'POST';
+    form.action = SHEETS_URL;
+    form.target = '_sheets_frame';
+    var input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'payload';
+    input.value = JSON.stringify(datos);
+    form.appendChild(input);
+    // Use XMLHttpRequest with no-cors
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', SHEETS_URL, true);
+    xhr.setRequestHeader('Content-Type', 'text/plain');
+    xhr.onload = function() { 
+      try { resolve(JSON.parse(xhr.responseText)); } 
+      catch(e) { resolve({ ok: true }); }
+    };
+    xhr.onerror = function() { 
+      // Try with fetch no-cors as fallback
+      fetch(SHEETS_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: JSON.stringify(datos)
+      }).then(function(){ resolve({ ok: true }); })
+        .catch(function(){ resolve({ ok: false }); });
+    };
+    xhr.send(JSON.stringify(datos));
+  });
+}
+
+function syncIncidencia(inc) {
+  sheetsPost('guardar_incidencia', {
+    id: inc.id, fecha: inc.fecha, zona: inc.zona, desc: inc.desc,
+    prio: inc.prio, resp: inc.resp, tipo: inc.tipo,
+    horas: inc.horas, coste: inc.coste, estado: inc.estado,
+    cierre: inc.cierre||'', nota: inc.nota||''
+  });
+}
+
+function syncTarea(t) {
+  sheetsPost('guardar_tarea', {
+    mes: currentTareasMes, zona: t.zona, desc: t.desc,
+    prio: t.prio, resp: t.resp, horas: t.horas,
+    coste: t.coste, estado: t.estado, comment: t.comment||''
+  });
+}
+
+function syncAuditoria(zid, mes) {
+  var z = ZONES.filter(function(x){ return x.id===zid; })[0];
+  if (!z) return;
+  var sc = auditState[zid]||[];
+  var comments = auditComments[zid]||{};
+  var items = z.items.map(function(item, ri) {
+    return { t: item.t, obt: sc[ri]>0?sc[ri]:0, max: item.max, comment: comments[ri]||'' };
+  });
+  sheetsPost('guardar_auditoria', {
+    mes: mes.label+' '+mes.year, zona: z.name,
+    fecha: new Date().toLocaleDateString('es-ES'), items: items
+  });
+}
+
+function syncJornada(jornada) {
+  sheetsPost('guardar_jornada', {
+    fecha: jornada.fecha, quien: jornada.quien,
+    tareas: jornada.tareas,
+    incidencias: jornada.incidencias||'', notas: jornada.notas||''
+  });
+}
+
+function syncLog(accionNombre, detalle) {
+  sheetsPost('log_accion', { accionNombre: accionNombre, detalle: detalle });
+}
+
+// Indicador visual de sync
+function showSyncStatus(ok) {
+  var el = document.getElementById('sync-status');
+  if (!el) return;
+  el.textContent = ok ? '✓ Guardado en Sheets' : '⚠ Sin conexión — datos locales';
+  el.style.color = ok ? 'var(--green)' : 'var(--amber)';
+  el.style.opacity = '1';
+  setTimeout(function(){ el.style.opacity='0'; }, 3000);
+}
+
+
+
+// ═══ CARGAR DATOS DEL SHEET AL INICIAR ═══
+function cargarDatosDelSheet() {
+  if (!SHEETS_URL) return;
+  var statusEl = document.getElementById('sync-status');
+  if (statusEl) { statusEl.textContent = 'Cargando datos...'; statusEl.style.opacity='1'; statusEl.style.color='var(--amber)'; }
+
+  // Use XMLHttpRequest to avoid CORS issues
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', SHEETS_URL, true);
+  xhr.onload = function() {
+    try {
+      var resp = JSON.parse(xhr.responseText);
+      if (!resp.ok || !resp.data) {
+        console.warn('Sheet response not ok:', resp);
+        if(statusEl){statusEl.textContent='⚠ Error al cargar';statusEl.style.color='var(--red)';setTimeout(function(){statusEl.style.opacity='0';},3000);}
+        return;
+      }
+      procesarDatosSheet(resp.data);
+      if(statusEl){statusEl.textContent='✓ Datos cargados';statusEl.style.color='var(--green)';setTimeout(function(){statusEl.style.opacity='0';},3000);}
+    } catch(e) {
+      console.warn('Error parsing Sheet response:', e, xhr.responseText);
+      if(statusEl){statusEl.textContent='⚠ Error formato';statusEl.style.color='var(--red)';setTimeout(function(){statusEl.style.opacity='0';},3000);}
+    }
+  };
+  xhr.onerror = function() {
+    console.warn('XHR error calling sheet');
+    if(statusEl){statusEl.textContent='⚠ Sin conexión';statusEl.style.color='var(--amber)';setTimeout(function(){statusEl.style.opacity='0';},3000);}
+  };
+  xhr.send();
+}
+
+function procesarDatosSheet(data) {
+  // ── TAREAS ──
+  if (data.TAREAS && data.TAREAS.length > 0) {
+    console.log('Procesando', data.TAREAS.length, 'tareas. Primera:', JSON.stringify(data.TAREAS[0]));
+    MESES_ES.forEach(function(m){ TAREAS_DATA[m] = []; });
+    var mesesMap = {
+      'enero':'ENERO','febrero':'FEBRERO','marzo':'MARZO','abril':'ABRIL',
+      'mayo':'MAYO','junio':'JUNIO','julio':'JULIO','agosto':'AGOSTO',
+      'septiembre':'SEPTIEMBRE','octubre':'OCTUBRE','noviembre':'NOVIEMBRE','diciembre':'DICIEMBRE',
+      'ENERO':'ENERO','FEBRERO':'FEBRERO','MARZO':'MARZO','ABRIL':'ABRIL',
+      'MAYO':'MAYO','JUNIO':'JUNIO','JULIO':'JULIO','AGOSTO':'AGOSTO',
+      'SEPTIEMBRE':'SEPTIEMBRE','OCTUBRE':'OCTUBRE','NOVIEMBRE':'NOVIEMBRE','DICIEMBRE':'DICIEMBRE',
+      'Enero':'ENERO','Febrero':'FEBRERO','Marzo':'MARZO','Abril':'ABRIL',
+      'Mayo':'MAYO','Junio':'JUNIO','Julio':'JULIO','Agosto':'AGOSTO',
+      'Septiembre':'SEPTIEMBRE','Octubre':'OCTUBRE','Noviembre':'NOVIEMBRE','Diciembre':'DICIEMBRE'
+    };
+    data.TAREAS.forEach(function(row) {
+      var mesRaw = String(row['Mes']||'').trim();
+      var mesKey = mesesMap[mesRaw];
+      if (!mesKey) {
+        // Try lowercase match
+        var mesLower = mesRaw.toLowerCase();
+        mesKey = mesesMap[mesLower];
+      }
+      if (!mesKey) { console.log('Mes no reconocido:', mesRaw); return; }
+      if (!TAREAS_DATA[mesKey]) TAREAS_DATA[mesKey] = [];
+      var prio = String(row['Prioridad']||'').toLowerCase();
+      var horasVal = row['Horas'];
+        var costeVal = row['Coste €'];
+        TAREAS_DATA[mesKey].push({
+        zona: String(row['Zona']||'OTROS').toUpperCase(),
+        desc: String(row['Descripción']||row['Descripcion']||''),
+        prio: prio==='urgente'?'urgente':'normal',
+        resp: String(row['Responsable']||''),
+        horas: horasVal!==''&&horasVal!==null?parseFloat(horasVal)||0:0,
+        coste: costeVal!==''&&costeVal!==null?parseFloat(costeVal)||0:0,
+        estado: String(row['Estado']||'Pendiente'),
+        comment: String(row['Comentarios']||'')
+      });
+    });
+    // Log result
+    var total = 0;
+    MESES_ES.forEach(function(m){ total += (TAREAS_DATA[m]||[]).length; });
+    console.log('Tareas cargadas por mes:', total);
+    MESES_ES.forEach(function(m){ if(TAREAS_DATA[m]&&TAREAS_DATA[m].length>0) console.log(' -', m, ':', TAREAS_DATA[m].length); });
+  }
+
+  // ── INCIDENCIAS ──
+  if (data.INCIDENCIAS && data.INCIDENCIAS.length > 0) {
+    INCS = data.INCIDENCIAS.map(function(row, i){
+      var prio = String(row['Prioridad']||'').toLowerCase();
+      return {
+        id: row['ID'] || (i+1),
+        zona: String(row['Zona']||''),
+        desc: String(row['Descripción']||''),
+        prio: prio==='urgente'||prio==='red'?'red': prio==='media'||prio==='amber'?'amber':'green',
+        resp: String(row['Responsable']||''),
+        fecha: String(row['Fecha apertura']||'2026-01-01'),
+        cierre: row['Fecha cierre']||null,
+        estado: String(row['Estado']||'Abierta'),
+        horas: parseFloat(row['Horas'])||0,
+        coste: parseFloat(row['Coste €'])||0,
+        tipo: String(row['Tipo']||'Correctivo'),
+        nota: String(row['Notas']||'')
+      };
+    });
+    nextIncId = INCS.length + 10;
+    console.log('Incidencias cargadas:', INCS.length);
+  }
+
+  // ── DIARIO ──
+  if (data.DIARIO && data.DIARIO.length > 0) {
+    var diarioMap = {};
+    data.DIARIO.forEach(function(row){
+      var key = String(row['Fecha'])+'_'+String(row['Trabajador']);
+      if (!diarioMap[key]) {
+        diarioMap[key] = {
+          id: nextDiarioId++, quien: String(row['Trabajador']),
+          fecha: String(row['Fecha']), tareas: [],
+          incidencias: String(row['Incidencias detectadas']||''),
+          notas: String(row['Notas del día']||''), horas_total: 0
+        };
+      }
+      var h = parseFloat(row['Horas reales'])||0;
+      diarioMap[key].tareas.push({desc:String(row['Tarea']||''),horas:h,estado:String(row['Estado']||'Terminado')});
+      diarioMap[key].horas_total = parseFloat((diarioMap[key].horas_total + h).toFixed(1));
+    });
+    var diarioKeys = Object.keys(diarioMap);
+    if (diarioKeys.length > 0) {
+      DIARIO = diarioKeys.map(function(k){ return diarioMap[k]; });
+      console.log('Jornadas cargadas:', DIARIO.length);
+    }
+  }
+
+  // Refresh current view
+  if (currentUser) {
+    var activePage = document.querySelector('.page.active');
+    if (activePage) {
+      var pageId = activePage.id.replace('page-','');
+      var activeBtn = document.querySelector('.nav-btn.active');
+      if (pageId==='tareas') { buildMesesFilter(); renderTareas(); }
+      else if (pageId==='incidencias') renderIncs();
+      else if (pageId==='diario') renderDiario();
+      else if (pageId==='resumen') { renderResumen(); renderUrgentes(); }
+    }
+  }
+}
+
+
+// Cambiar estado de una tarea
+function cambiarEstadoTarea(idx, nuevoEstado) {
+  var zonaFiltro = document.getElementById('t-zona-sel').value;
+  var mesActualIdx = MESES_ES.indexOf(currentTareasMes);
+
+  // Build full list same as renderTareas (pendientes anteriores + mes actual)
+  var allRefs = [];
+  for(var mi=0; mi<mesActualIdx; mi++){
+    var mesPasado = MESES_ES[mi];
+    (TAREAS_DATA[mesPasado]||[]).forEach(function(t, ti){
+      if(t.estado !== 'Terminado'){
+        if(zonaFiltro==='TODAS'||t.zona===zonaFiltro) allRefs.push({mes:mesPasado, idx:ti});
+      }
+    });
+  }
+  (TAREAS_DATA[currentTareasMes]||[]).forEach(function(t, ti){
+    if(zonaFiltro==='TODAS'||t.zona===zonaFiltro) allRefs.push({mes:currentTareasMes, idx:ti});
+  });
+
+  if(idx >= 0 && idx < allRefs.length){
+    var ref = allRefs[idx];
+    TAREAS_DATA[ref.mes][ref.idx].estado = nuevoEstado;
+    var t = TAREAS_DATA[ref.mes][ref.idx];
+    // Sync to Sheet
+    sheetsPost('guardar_tarea', {
+      mes: MESES_LABEL[MESES_ES.indexOf(ref.mes)],
+      zona: t.zona, desc: t.desc, prio: t.prio,
+      resp: t.resp, horas: t.horas, coste: t.coste,
+      estado: nuevoEstado, comment: t.comment||''
+    });
+    logAction('Tarea '+nuevoEstado, t.desc);
+  }
+  renderTareas();
+}
+
+
+// ═══ INIT ═══
+renderLoginUsers();
+</script></body></html>
