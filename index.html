@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -305,7 +305,10 @@ select{padding:7px 11px;border:1px solid var(--border2);border-radius:var(--rsm)
       <div class="alert alert-a" id="t-arrastradas-alert" style="display:none"></div>
       <div class="alert alert-r"><strong>Déficit horas acumulado</strong> — Ene: -88.5h · Feb: -107.5h · Mar: -253h · Abr: -245h. Valorar refuerzo del equipo.</div>
       <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:1rem;justify-content:space-between">
-        <div id="meses-filter" style="display:flex;gap:6px;flex-wrap:wrap"></div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;width:100%">
+          <div id="meses-filter" style="display:flex;gap:6px;flex-wrap:wrap;flex:1"></div>
+          <button class="btn-p btn-sm" onclick="openSheet('tarea-overlay')"><i class="ti ti-plus"></i> Nueva tarea</button>
+        </div>
         <select id="t-zona-sel" onchange="renderTareas()" style="font-size:12px">
           <option value="TODAS">Todas las zonas</option>
           <option value="URGENCIAS">🔴 Urgencias</option>
@@ -1139,7 +1142,13 @@ function renderTareas(){
           (t.horas>0?'<span style="font-size:11px;color:var(--text2)"><i class="ti ti-clock" style="font-size:12px"></i> '+t.horas+'h</span>':'')+
           (t.coste>0?'<span style="font-size:11px;color:var(--sky)">'+t.coste+'€</span>':'')+
           (t.comment?'<span style="font-size:11px;color:var(--text3);font-style:italic">'+t.comment+'</span>':'')+
-          '</div></div><span class="badge '+sb+'" style="flex-shrink:0">'+t.estado+'</span></div>';
+          '</div>'+
+          '<div style="display:flex;gap:6px;margin-top:6px">'+
+          (t.estado==='Pendiente'?'<button class="btn-g btn-sm" style="font-size:11px;padding:3px 9px" onclick="cambiarEstadoTarea('+i+',\'En curso\')"><i class="ti ti-player-play"></i> En curso</button>':'')+
+          (t.estado!=='Terminado'?'<button class="btn-g btn-sm" style="font-size:11px;padding:3px 9px;border-color:var(--green);color:var(--green)" onclick="cambiarEstadoTarea('+i+',\'Terminado\')"><i class="ti ti-check"></i> Terminado</button>':'')+
+          (t.estado==='Terminado'?'<button class="btn-g btn-sm" style="font-size:11px;padding:3px 9px" onclick="cambiarEstadoTarea('+i+',\'Pendiente\')"><i class="ti ti-refresh"></i> Reabrir</button>':'')+
+          '</div>'+
+          '</div><span class="badge '+sb+'" style="flex-shrink:0;align-self:flex-start">'+t.estado+'</span></div>';
       }).join('')+'</div>';
   }).join('');
 }
@@ -1554,46 +1563,40 @@ function procesarDatosSheet(data) {
 
 
 // Cambiar estado de una tarea
-function cambiarEstadoTarea(zona, idx, nuevoEstado) {
-  // Find the actual task in TAREAS_DATA
-  // We need to find by index in the filtered+accumulated list
-  // Rebuild the same list as renderTareas to find the right task
+function cambiarEstadoTarea(idx, nuevoEstado) {
+  var zonaFiltro = document.getElementById('t-zona-sel').value;
   var mesActualIdx = MESES_ES.indexOf(currentTareasMes);
-  var pendientesAnteriores = [];
+
+  // Build full list same as renderTareas (pendientes anteriores + mes actual)
+  var allRefs = [];
   for(var mi=0; mi<mesActualIdx; mi++){
     var mesPasado = MESES_ES[mi];
-    var mesPasadoLabel = MESES_LABEL[mi];
-    var tareasPasadas = TAREAS_DATA[mesPasado]||[];
-    tareasPasadas.forEach(function(t, ti){
+    (TAREAS_DATA[mesPasado]||[]).forEach(function(t, ti){
       if(t.estado !== 'Terminado'){
-        pendientesAnteriores.push({mes: mesPasado, idx: ti});
+        if(zonaFiltro==='TODAS'||t.zona===zonaFiltro) allRefs.push({mes:mesPasado, idx:ti});
       }
     });
   }
-
-  var zonaFiltro = document.getElementById('t-zona-sel').value;
-  var dataMes = (TAREAS_DATA[currentTareasMes]||[]);
-  
-  // Build full list same as renderTareas
-  var allData = [];
-  pendientesAnteriores.forEach(function(ref){
-    var t = TAREAS_DATA[ref.mes][ref.idx];
-    if(zonaFiltro==='TODAS'||t.zona===zonaFiltro) allData.push({mes:ref.mes, idx:ref.idx});
-  });
-  dataMes.forEach(function(t, ti){
-    if(zonaFiltro==='TODAS'||t.zona===zonaFiltro) allData.push({mes:currentTareasMes, idx:ti});
+  (TAREAS_DATA[currentTareasMes]||[]).forEach(function(t, ti){
+    if(zonaFiltro==='TODAS'||t.zona===zonaFiltro) allRefs.push({mes:currentTareasMes, idx:ti});
   });
 
-  if(idx < allData.length){
-    var ref = allData[idx];
+  if(idx >= 0 && idx < allRefs.length){
+    var ref = allRefs[idx];
     TAREAS_DATA[ref.mes][ref.idx].estado = nuevoEstado;
-    // Sync to Sheet
     var t = TAREAS_DATA[ref.mes][ref.idx];
-    syncTarea(Object.assign({}, t, {mes: MESES_LABEL[MESES_ES.indexOf(ref.mes)]}));
+    // Sync to Sheet
+    sheetsPost('guardar_tarea', {
+      mes: MESES_LABEL[MESES_ES.indexOf(ref.mes)],
+      zona: t.zona, desc: t.desc, prio: t.prio,
+      resp: t.resp, horas: t.horas, coste: t.coste,
+      estado: nuevoEstado, comment: t.comment||''
+    });
     logAction('Tarea '+nuevoEstado, t.desc);
   }
   renderTareas();
 }
+
 
 // ═══ INIT ═══
 renderLoginUsers();
